@@ -7,8 +7,7 @@ type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-tags:
-  - API
+tags: []
 created: '2025-02-08'
 modified: '2026-03-16'
 url: >-
@@ -21,8 +20,7 @@ apis:
       Use our tools and services to provide an exceptional experience to Samsung users
       around the world.
     humanURL: ' https://developer.samsung.com/'
-    tags:
-      - API
+    tags: []
     properties:
       - type: Documentation
         url: ' https://developer.samsung.com/'
