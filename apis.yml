@@ -1,8 +1,8 @@
 aid: samsung
 name: Samsung
 description: >-
-  Use our tools and services to provide an exceptional experience to Samsung
-  users around the world 
+  Use our tools and services to provide an exceptional experience to Samsung users
+  around the world.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -18,8 +18,8 @@ apis:
   - aid: samsung:samsung
     name: Samsung
     description: >-
-      Use our tools and services to provide an exceptional experience to Samsung
-      users around the world 
+      Use our tools and services to provide an exceptional experience to Samsung users
+      around the world.
     humanURL: ' https://developer.samsung.com/'
     tags:
       - API
