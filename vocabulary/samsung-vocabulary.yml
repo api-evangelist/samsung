@@ -1,0 +1,186 @@
+name: Samsung Developer Vocabulary
+description: >-
+  Vocabulary and taxonomy for the Samsung developer ecosystem covering SmartThings
+  IoT platform, Knox enterprise device management, Galaxy mobile SDKs, Smart TV,
+  Bixby voice AI, Samsung Health, and Samsung Wallet developer terminology.
+version: '1.0'
+created: '2026-05-02'
+modified: '2026-05-02'
+url: https://developer.samsung.com/
+
+terms:
+  - term: SmartThings
+    definition: >-
+      Samsung's IoT and smart home platform that connects thousands of compatible
+      devices from Samsung and partner manufacturers. Provides REST APIs for device
+      control, automation rules, scenes, and location management.
+    tags:
+      - IoT
+      - Platform
+      - Smart Home
+
+  - term: Capability
+    definition: >-
+      In SmartThings, a named, versioned set of attributes and commands that define
+      a device's functional interface (e.g., switch, temperatureMeasurement, lock).
+      Capabilities abstract hardware differences between device types.
+    tags:
+      - Device
+      - SmartThings
+
+  - term: Location
+    definition: >-
+      A SmartThings location represents a physical place (home, office, warehouse)
+      containing devices, rooms, scenes, and automations. A user may have multiple
+      locations.
+    tags:
+      - SmartThings
+      - Organization
+
+  - term: Scene
+    definition: >-
+      A SmartThings scene is a saved configuration of device states that can be
+      activated with a single command (e.g., "Movie Time" dims lights and activates TV).
+    tags:
+      - Automation
+      - SmartThings
+
+  - term: Rule
+    definition: >-
+      A SmartThings automation rule defining trigger conditions and resulting actions
+      (e.g., "When motion is detected, turn on lights"). Composed of conditions,
+      actions, and schedules.
+    tags:
+      - Automation
+      - SmartThings
+
+  - term: Knox
+    definition: >-
+      Samsung's enterprise mobile security and management platform providing hardware-
+      level security, MDM/EMM capabilities, device policy enforcement, bulk enrollment,
+      FOTA management, and enterprise app management for Galaxy devices.
+    tags:
+      - Enterprise
+      - MDM
+      - Security
+
+  - term: Knox SDK
+    definition: >-
+      Android SDK for enterprise app developers to access Knox-specific hardware
+      security features including container isolation, VPN, encryption policy, and
+      device restriction APIs on Samsung Galaxy devices.
+    tags:
+      - Enterprise
+      - Knox
+      - SDK
+
+  - term: Knox Mobile Enrollment (KME)
+    definition: >-
+      A Knox service for bulk enrolling Samsung devices into MDM/EMM solutions at
+      enterprise scale. Devices are automatically enrolled when powered on,
+      without manual setup.
+    synonyms:
+      - KME
+    tags:
+      - Enrollment
+      - Knox
+
+  - term: Knox Configure
+    definition: >-
+      A Knox cloud service for remotely customizing and rebranding Samsung devices
+      at scale, including setting default apps, kiosk mode, branding, and restrictions.
+    tags:
+      - Configuration
+      - Knox
+
+  - term: Knox Guard
+    definition: >-
+      A Samsung Knox service for device-as-a-service and leasing scenarios that allows
+      remote locking of devices to protect against fraud and theft if payments lapse.
+    tags:
+      - Knox
+      - Security
+
+  - term: Galaxy Watch
+    definition: >-
+      Samsung's wearable smartwatch platform running Wear OS. Samsung Health SDK
+      and Galaxy Watch SDK enable developers to build apps with access to biometric
+      sensors and health data.
+    tags:
+      - Health
+      - Wearable
+
+  - term: Bixby
+    definition: >-
+      Samsung's AI voice assistant available on Galaxy smartphones, tablets, smart
+      TVs, and appliances. Developers build Bixby "capsules" (skills) using the
+      Bixby Developer Center to add voice-controlled features.
+    tags:
+      - AI
+      - Voice
+
+  - term: Tizen
+    definition: >-
+      Samsung's Linux-based operating system used in Smart TVs, smart appliances,
+      wearables, and IoT devices. Tizen SDK provides web and native development
+      environments for Samsung Smart TV apps.
+    tags:
+      - Platform
+      - Smart TV
+
+  - term: Samsung Health
+    definition: >-
+      Samsung's health and fitness tracking platform. The Samsung Health SDK allows
+      third-party apps to read and write health data including steps, heart rate,
+      sleep, workouts, and body composition on Galaxy devices.
+    tags:
+      - Fitness
+      - Health
+      - Wearable
+
+  - term: Samsung Wallet
+    definition: >-
+      Samsung's digital wallet for storing and presenting passes, tickets, boarding
+      passes, loyalty cards, and payment credentials on Galaxy devices. Developer
+      API enables digital pass issuance.
+    tags:
+      - Digital Wallet
+      - Payments
+
+  - term: Works with SmartThings
+    definition: >-
+      Samsung's device certification program confirming third-party devices meet
+      SmartThings compatibility standards and can be discovered and controlled
+      via the SmartThings platform and app.
+    tags:
+      - Certification
+      - SmartThings
+
+categories:
+  - name: Smart Home and IoT
+    terms:
+      - SmartThings
+      - Capability
+      - Location
+      - Scene
+      - Rule
+      - Works with SmartThings
+
+  - name: Enterprise Device Management
+    terms:
+      - Knox
+      - Knox SDK
+      - Knox Mobile Enrollment (KME)
+      - Knox Configure
+      - Knox Guard
+
+  - name: Mobile and Wearable
+    terms:
+      - Galaxy Watch
+      - Samsung Health
+      - Samsung Wallet
+      - Bixby
+
+  - name: Display and TV
+    terms:
+      - Tizen

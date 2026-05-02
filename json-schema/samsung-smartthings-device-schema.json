@@ -1,0 +1,118 @@
+{
+  "$id": "samsung-smartthings-device-schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Samsung SmartThings Device",
+  "description": "Schema for a Samsung SmartThings connected device entity as returned by the SmartThings REST API. Represents any device connected to the SmartThings platform including Samsung appliances, lights, locks, thermostats, sensors, and third-party Works with SmartThings devices.",
+  "type": "object",
+  "required": ["deviceId", "name", "manufacturerName", "presentationId"],
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique device identifier (UUID)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Device display name set by the user or manufacturer."
+    },
+    "label": {
+      "type": "string",
+      "description": "User-assigned label for the device."
+    },
+    "manufacturerName": {
+      "type": "string",
+      "description": "Name of the device manufacturer."
+    },
+    "presentationId": {
+      "type": "string",
+      "description": "Device presentation identifier for UI rendering."
+    },
+    "deviceManufacturerCode": {
+      "type": "string",
+      "description": "Manufacturer-assigned device type code."
+    },
+    "locationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the SmartThings location this device belongs to."
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "ID of the user account that owns the device."
+    },
+    "roomId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the room this device is assigned to."
+    },
+    "components": {
+      "type": "array",
+      "description": "Device components, each representing a functional sub-unit (e.g., main, sub).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Component ID (main, sub, etc.)."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable component label."
+          },
+          "capabilities": {
+            "type": "array",
+            "description": "SmartThings capabilities supported by this component.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Capability identifier (e.g., switch, temperatureMeasurement, motionSensor)."
+                },
+                "version": {
+                  "type": "integer",
+                  "description": "Capability version."
+                }
+              }
+            }
+          },
+          "categories": {
+            "type": "array",
+            "description": "Device category classifications.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Category name (e.g., Light, Thermostat, Lock)."
+                },
+                "categoryType": {
+                  "type": "string",
+                  "enum": ["manufacturer", "user"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "Device integration type.",
+      "enum": ["ENDPOINT_APP", "DTH", "MOBILE", "VIPER", "MATTER", "LAN", "BLE", "ZWave", "Zigbee", "IR_OCF", "HUB"]
+    },
+    "restrictionTier": {
+      "type": "integer",
+      "description": "Restriction level for the device.",
+      "minimum": 0
+    },
+    "allowed": {
+      "type": "array",
+      "description": "List of allowed actions on this device.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

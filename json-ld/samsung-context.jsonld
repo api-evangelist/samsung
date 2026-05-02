@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "iot": "https://www.w3.org/ns/ssn/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "samsung": "https://developer.samsung.com/vocabulary#",
+    "st": "https://developer.smartthings.com/vocabulary#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Device": "schema:Device",
+    "Location": "schema:Place",
+    "Room": "schema:Room",
+    "Scene": "schema:Action",
+    "Rule": "schema:Intangible",
+    "Automation": "schema:Intangible",
+
+    "deviceId": "@id",
+    "name": "schema:name",
+    "label": "schema:alternateName",
+    "description": "schema:description",
+
+    "locationId": "schema:containedInPlace",
+    "roomId": "st:room",
+    "ownerId": "schema:accountablePerson",
+    "manufacturerName": "schema:manufacturer",
+    "deviceManufacturerCode": "schema:productID",
+    "presentationId": "st:presentationId",
+    "type": "schema:additionalType",
+
+    "components": "schema:hasPart",
+    "capabilities": "st:capabilities",
+    "categories": "schema:category",
+
+    "switch": "st:switch",
+    "level": "st:level",
+    "temperatureMeasurement": "sosa:ObservableProperty",
+    "motionSensor": "sosa:ObservableProperty",
+    "contactSensor": "sosa:ObservableProperty",
+    "lock": "st:lock",
+    "colorControl": "st:colorControl",
+    "powerMeter": "sosa:ObservableProperty",
+
+    "knoxDeviceId": "samsung:knoxDeviceId",
+    "enrollmentType": "samsung:enrollmentType",
+    "policyName": "samsung:policyName",
+    "deviceModel": "schema:model",
+    "firmwareVersion": "schema:softwareVersion",
+    "serialNumber": "schema:serialNumber",
+
+    "healthId": "schema:identifier",
+    "stepCount": "samsung:stepCount",
+    "heartRate": "samsung:heartRate",
+    "sleepDuration": "samsung:sleepDuration",
+
+    "appId": "schema:identifier",
+    "platform": "schema:operatingSystem",
+    "version": "schema:version",
+    "createdDate": "schema:dateCreated",
+    "modifiedDate": "schema:dateModified"
+  }
+}
