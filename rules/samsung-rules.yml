@@ -1,0 +1,133 @@
+extends: "spectral:oas"
+
+rules:
+  # Samsung SmartThings API conventions
+
+  samsung-operation-summary-title-case:
+    description: Operation summaries must use Title Case.
+    message: "Summary '{{value}}' must use Title Case (capitalize each word)."
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*(\\s[A-Z][a-zA-Z0-9]*)*$"
+
+  samsung-operation-id-camel-case:
+    description: Operation IDs must use camelCase naming convention.
+    message: "OperationId '{{value}}' must be camelCase."
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  samsung-path-kebab-case:
+    description: Path segments must use kebab-case (lowercase with hyphens).
+    message: "Path segment '{{value}}' must use kebab-case."
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(\\/([a-z0-9-]+|\\{[a-zA-Z][a-zA-Z0-9_]*\\}))*$"
+
+  samsung-response-200-schema:
+    description: All 200 responses must include a schema definition.
+    message: "Operation '{{path}}' 200 response should include a content schema."
+    severity: warn
+    given: "$.paths[*][get,post,put,patch].responses['200']"
+    then:
+      field: content
+      function: truthy
+
+  samsung-bearer-auth:
+    description: SmartThings API uses OAuth 2.0 Bearer token authentication.
+    message: "API must declare BearerAuth security scheme."
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: BearerAuth
+      function: truthy
+
+  samsung-uuid-format:
+    description: Device IDs, location IDs, and room IDs must use UUID format.
+    message: "ID parameter '{{path}}' should use format: uuid."
+    severity: warn
+    given: "$.components.schemas[*].properties[?(@.description =~ /[Uu]nique.*identifier/)]"
+    then:
+      field: format
+      function: enumeration
+      functionOptions:
+        values:
+          - uuid
+          - uri
+
+  samsung-pagination-links:
+    description: Collection endpoints should return pagination links.
+    message: "Collection schema '{{path}}' should include _links for pagination."
+    severity: info
+    given: "$.paths[*][get].responses['200'].content['application/json'].schema.properties"
+    then:
+      field: _links
+      function: truthy
+
+  samsung-no-trailing-slash:
+    description: API paths must not end with a trailing slash.
+    message: "Path '{{path}}' must not end with a trailing slash."
+    severity: error
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\/$"
+
+  samsung-tags-required:
+    description: All operations must have at least one tag for categorization.
+    message: "Operation '{{path}}' must declare at least one tag."
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  samsung-description-required:
+    description: All operations must have a description.
+    message: "Operation '{{path}}' must include a description."
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  samsung-delete-no-request-body:
+    description: DELETE operations must not include a request body.
+    message: "DELETE operation '{{path}}' must not have a request body."
+    severity: error
+    given: "$.paths[*][delete]"
+    then:
+      field: requestBody
+      function: falsy
+
+  samsung-post-request-body-required:
+    description: POST operations that create resources must have a request body.
+    message: "POST operation '{{path}}' must include a request body."
+    severity: warn
+    given: "$.paths[*][post]"
+    then:
+      field: requestBody
+      function: truthy
+
+  samsung-401-defined:
+    description: All secured operations must declare a 401 Unauthorized response.
+    message: "Operation '{{path}}' must define a 401 response for authentication errors."
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      field: "401"
+      function: truthy

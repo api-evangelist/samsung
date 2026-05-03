@@ -34,6 +34,7 @@ apis:
       locations, and building smart home integrations. Supports OAuth 2.0 and
       personal access tokens. Base URL: https://api.smartthings.com/v1.
     humanURL: https://developer.smartthings.com/
+    baseURL: https://api.smartthings.com/v1
     tags:
       - Automations
       - Connected Devices
@@ -49,7 +50,7 @@ apis:
       - type: Documentation
         url: https://developer.smartthings.com/docs/api/public
       - type: OpenAPI
-        url: https://developer.smartthings.com/docs/api/public
+        url: openapi/samsung-smartthings-openapi.yml
   - aid: samsung:knox-cloud
     name: Knox Cloud APIs
     description: >-
@@ -169,12 +170,27 @@ common:
   - type: GitHubOrganization
     url: https://github.com/samsung
     title: Samsung GitHub Organization
+  - type: SpectralRules
+    url: rules/samsung-rules.yml
+    title: Samsung API Spectral Rules
+  - type: NaftikoCapability
+    url: capabilities/smart-home-control.yaml
+    title: Samsung SmartThings Smart Home Control Capability
   - type: JSONSchema
     url: json-schema/samsung-smartthings-device-schema.json
     title: Samsung SmartThings Device Schema
+  - type: JSONStructure
+    url: json-structure/samsung-smartthings-device-structure.json
+    title: Samsung SmartThings Device Structure
   - type: JSONLDContext
     url: json-ld/samsung-context.jsonld
     title: Samsung JSON-LD Context
+  - type: Example
+    url: examples/samsung-list-devices-example.json
+    title: Samsung SmartThings List Devices Example
+  - type: Example
+    url: examples/samsung-execute-device-command-example.json
+    title: Samsung SmartThings Execute Device Command Example
   - type: Vocabulary
     url: vocabulary/samsung-vocabulary.yml
     title: Samsung Developer Vocabulary

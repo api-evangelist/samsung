@@ -1,0 +1,347 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Samsung SmartThings Smart Home Control"
+  description: >-
+    Smart home control and automation workflow capability using the Samsung
+    SmartThings REST API. Provides unified access to connected device control,
+    location and room management, scene activation, and automation rule management.
+    Designed for smart home application developers, IoT integration engineers,
+    and home automation enthusiasts building SmartThings-connected experiences.
+  tags:
+    - Automations
+    - Device Control
+    - IoT
+    - Locations
+    - Rules
+    - Samsung
+    - Scenes
+    - Smart Home
+    - SmartThings
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SMARTTHINGS_PAT: SMARTTHINGS_PAT
+
+capability:
+  consumes:
+    - import: smartthings
+      location: ./shared/smartthings.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: smart-home-control-api
+      description: "Unified REST API for Samsung SmartThings smart home device control and automation."
+      resources:
+        - path: /v1/devices
+          name: devices
+          description: "Connected IoT device inventory and status."
+          operations:
+            - method: GET
+              name: list-devices
+              description: "List all SmartThings connected devices, optionally filtered by location or capability."
+              call: "smartthings.list-devices"
+              with:
+                locationId: "rest.locationId"
+                capabilityId: "rest.capabilityId"
+                max: "rest.max"
+                pageToken: "rest.pageToken"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/devices/{deviceId}
+          name: device-detail
+          description: "Individual device management."
+          operations:
+            - method: GET
+              name: get-device
+              description: "Get details for a specific connected device."
+              call: "smartthings.get-device"
+              with:
+                deviceId: "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/devices/{deviceId}/status
+          name: device-status
+          description: "Real-time device attribute status."
+          operations:
+            - method: GET
+              name: get-device-status
+              description: "Get current attribute values for all device components and capabilities."
+              call: "smartthings.get-device-status"
+              with:
+                deviceId: "rest.deviceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/devices/{deviceId}/commands
+          name: device-commands
+          description: "Device capability command execution."
+          operations:
+            - method: POST
+              name: execute-device-commands
+              description: "Execute capability commands on a device (e.g., switch.on, lock.lock, thermostat.setCoolingSetpoint)."
+              call: "smartthings.execute-device-commands"
+              with:
+                deviceId: "rest.deviceId"
+                commands: "rest.commands"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/locations
+          name: locations
+          description: "SmartThings location management."
+          operations:
+            - method: GET
+              name: list-locations
+              description: "List all SmartThings locations."
+              call: "smartthings.list-locations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-location
+              description: "Create a new SmartThings location."
+              call: "smartthings.create-location"
+              with:
+                name: "rest.name"
+                countryCode: "rest.countryCode"
+                timeZoneId: "rest.timeZoneId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/locations/{locationId}/rooms
+          name: rooms
+          description: "Room management within a location."
+          operations:
+            - method: GET
+              name: list-rooms
+              description: "List all rooms in a SmartThings location."
+              call: "smartthings.list-rooms"
+              with:
+                locationId: "rest.locationId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-room
+              description: "Create a new room within a location."
+              call: "smartthings.create-room"
+              with:
+                locationId: "rest.locationId"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/scenes
+          name: scenes
+          description: "Scene (saved device state configuration) management."
+          operations:
+            - method: GET
+              name: list-scenes
+              description: "List all SmartThings scenes."
+              call: "smartthings.list-scenes"
+              with:
+                locationId: "rest.locationId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/scenes/{sceneId}/execute
+          name: scene-execute
+          description: "Scene activation."
+          operations:
+            - method: POST
+              name: execute-scene
+              description: "Activate a SmartThings scene, applying its saved device configuration."
+              call: "smartthings.execute-scene"
+              with:
+                sceneId: "rest.sceneId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rules
+          name: rules
+          description: "Automation rule management."
+          operations:
+            - method: GET
+              name: list-rules
+              description: "List SmartThings automation rules."
+              call: "smartthings.list-rules"
+              with:
+                locationId: "rest.locationId"
+                max: "rest.max"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-rule
+              description: "Create a new automation rule."
+              call: "smartthings.create-rule"
+              with:
+                locationId: "rest.locationId"
+                name: "rest.name"
+                actions: "rest.actions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/subscriptions
+          name: subscriptions
+          description: "Device event subscriptions for real-time automation."
+          operations:
+            - method: GET
+              name: list-subscriptions
+              description: "List active event subscriptions."
+              call: "smartthings.list-subscriptions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-subscription
+              description: "Subscribe to device capability events."
+              call: "smartthings.create-subscription"
+              with:
+                sourceType: "rest.sourceType"
+                device: "rest.device"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: smart-home-control-mcp
+      transport: http
+      description: "MCP server for AI-assisted Samsung SmartThings smart home control and automation."
+      tools:
+        - name: list-devices
+          description: "List all SmartThings connected devices. Use to discover available IoT devices in a location."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "smartthings.list-devices"
+          with:
+            locationId: "tools.locationId"
+            capabilityId: "tools.capabilityId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-device
+          description: "Get details for a specific SmartThings device including its components and capabilities."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "smartthings.get-device"
+          with:
+            deviceId: "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-device-status
+          description: "Get the current real-time status of all device attributes (e.g., switch state, temperature, lock status)."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "smartthings.get-device-status"
+          with:
+            deviceId: "tools.deviceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: execute-device-commands
+          description: "Execute commands on a SmartThings device to control it (e.g., turn on a light, lock a door, set thermostat)."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "smartthings.execute-device-commands"
+          with:
+            deviceId: "tools.deviceId"
+            commands: "tools.commands"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-locations
+          description: "List all SmartThings locations (homes, offices) accessible to the user."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "smartthings.list-locations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-rooms
+          description: "List all rooms within a SmartThings location."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "smartthings.list-rooms"
+          with:
+            locationId: "tools.locationId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-scenes
+          description: "List SmartThings scenes (saved device state configurations like 'Movie Time' or 'Away Mode')."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "smartthings.list-scenes"
+          with:
+            locationId: "tools.locationId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: execute-scene
+          description: "Activate a SmartThings scene to apply a saved configuration to multiple devices at once."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "smartthings.execute-scene"
+          with:
+            sceneId: "tools.sceneId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-rules
+          description: "List SmartThings automation rules (if-this-then-that conditions)."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "smartthings.list-rules"
+          with:
+            locationId: "tools.locationId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-rule
+          description: "Create a new SmartThings automation rule that triggers device actions based on conditions."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "smartthings.create-rule"
+          with:
+            locationId: "tools.locationId"
+            name: "tools.name"
+            actions: "tools.actions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-subscription
+          description: "Subscribe to SmartThings device capability events for real-time updates."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "smartthings.create-subscription"
+          with:
+            sourceType: "tools.sourceType"
+            device: "tools.device"
+          outputParameters:
+            - type: object
+              mapping: "$."

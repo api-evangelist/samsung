@@ -1,0 +1,82 @@
+{
+  "summary": "List SmartThings Devices",
+  "description": "Example request and response for listing SmartThings connected devices using the SmartThings REST API.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.smartthings.com/v1/devices",
+    "headers": {
+      "Authorization": "Bearer {{SMARTTHINGS_PAT}}",
+      "Accept": "application/json"
+    },
+    "queryParameters": {
+      "locationId": "d3e5f700-a1b2-43c4-d5e6-f78901234567"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "deviceId": "550e8400-e29b-41d4-a716-446655440000",
+          "name": "Living Room Light",
+          "label": "Main Light",
+          "manufacturerName": "Philips",
+          "presentationId": "generic-dimmer-switch",
+          "locationId": "d3e5f700-a1b2-43c4-d5e6-f78901234567",
+          "roomId": "a1b2c3d4-e5f6-7890-ab12-cd34ef567890",
+          "ownerId": "user-abc123",
+          "type": "MATTER",
+          "components": [
+            {
+              "id": "main",
+              "label": "Main",
+              "capabilities": [
+                { "id": "switch", "version": 1 },
+                { "id": "switchLevel", "version": 1 },
+                { "id": "colorControl", "version": 1 }
+              ],
+              "categories": [
+                { "name": "Light", "categoryType": "manufacturer" }
+              ]
+            }
+          ],
+          "restrictionTier": 0,
+          "allowed": []
+        },
+        {
+          "deviceId": "661f9511-f30c-52e5-b827-557766551111",
+          "name": "Front Door Lock",
+          "label": "Front Door",
+          "manufacturerName": "Schlage",
+          "presentationId": "schlage-encode-plus",
+          "locationId": "d3e5f700-a1b2-43c4-d5e6-f78901234567",
+          "roomId": "b2c3d4e5-f6a7-8901-bc23-de45fg678901",
+          "ownerId": "user-abc123",
+          "type": "ZWave",
+          "components": [
+            {
+              "id": "main",
+              "label": "Main",
+              "capabilities": [
+                { "id": "lock", "version": 1 },
+                { "id": "battery", "version": 1 }
+              ],
+              "categories": [
+                { "name": "SmartLock", "categoryType": "manufacturer" }
+              ]
+            }
+          ],
+          "restrictionTier": 0,
+          "allowed": []
+        }
+      ],
+      "_links": {
+        "next": null,
+        "previous": null
+      }
+    }
+  }
+}

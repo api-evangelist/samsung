@@ -1,0 +1,36 @@
+{
+  "summary": "Execute Device Command",
+  "description": "Example request and response for executing a SmartThings device command — turning on a light switch using the HTTP POST /devices/{deviceId}/commands endpoint.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.smartthings.com/v1/devices/550e8400-e29b-41d4-a716-446655440000/commands",
+    "headers": {
+      "Authorization": "Bearer {{SMARTTHINGS_PAT}}",
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "commands": [
+        {
+          "component": "main",
+          "capability": "switch",
+          "command": "on"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "results": [
+        {
+          "id": "cmd-result-abc123",
+          "status": "ACCEPTED"
+        }
+      ]
+    }
+  }
+}

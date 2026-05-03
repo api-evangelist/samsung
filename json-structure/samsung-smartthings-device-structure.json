@@ -1,0 +1,143 @@
+{
+  "name": "SmartThings Device",
+  "description": "Field hierarchy for a Samsung SmartThings connected device as returned by the SmartThings REST API.",
+  "url": "https://developer.smartthings.com/docs/devices/overview",
+  "fields": [
+    {
+      "name": "deviceId",
+      "type": "string (uuid)",
+      "required": true,
+      "description": "Unique device identifier (UUID).",
+      "example": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "description": "Device display name set by user or manufacturer.",
+      "example": "Living Room Light"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "description": "User-assigned label for the device.",
+      "example": "Main Light"
+    },
+    {
+      "name": "manufacturerName",
+      "type": "string",
+      "required": true,
+      "description": "Name of the device manufacturer.",
+      "example": "Samsung"
+    },
+    {
+      "name": "presentationId",
+      "type": "string",
+      "required": true,
+      "description": "Device presentation identifier for UI rendering.",
+      "example": "ST_Light_0001"
+    },
+    {
+      "name": "locationId",
+      "type": "string (uuid)",
+      "required": false,
+      "description": "ID of the SmartThings location this device belongs to.",
+      "example": "d3e5f700-a1b2-43c4-d5e6-f78901234567"
+    },
+    {
+      "name": "roomId",
+      "type": "string (uuid)",
+      "required": false,
+      "description": "ID of the room this device is assigned to.",
+      "example": "a1b2c3d4-e5f6-7890-ab12-cd34ef567890"
+    },
+    {
+      "name": "ownerId",
+      "type": "string",
+      "required": false,
+      "description": "Owner user account ID.",
+      "example": "user-abc123"
+    },
+    {
+      "name": "type",
+      "type": "enum",
+      "required": false,
+      "description": "Device integration type.",
+      "allowedValues": ["ENDPOINT_APP", "DTH", "MOBILE", "VIPER", "MATTER", "LAN", "BLE", "ZWave", "Zigbee", "HUB"],
+      "example": "MATTER"
+    },
+    {
+      "name": "components",
+      "type": "array",
+      "required": false,
+      "description": "Functional sub-units of the device.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Component ID (e.g., main, sub).",
+          "example": "main"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Human-readable component label.",
+          "example": "Main"
+        },
+        {
+          "name": "capabilities",
+          "type": "array",
+          "description": "SmartThings capabilities this component supports.",
+          "fields": [
+            {
+              "name": "id",
+              "type": "string",
+              "description": "Capability identifier.",
+              "example": "switch"
+            },
+            {
+              "name": "version",
+              "type": "integer",
+              "description": "Capability version.",
+              "example": 1
+            }
+          ]
+        },
+        {
+          "name": "categories",
+          "type": "array",
+          "description": "Device category classifications.",
+          "fields": [
+            {
+              "name": "name",
+              "type": "string",
+              "description": "Category name.",
+              "example": "Light"
+            },
+            {
+              "name": "categoryType",
+              "type": "enum",
+              "allowedValues": ["manufacturer", "user"],
+              "example": "manufacturer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "restrictionTier",
+      "type": "integer",
+      "required": false,
+      "description": "Device restriction level (0 = unrestricted).",
+      "example": 0
+    },
+    {
+      "name": "allowed",
+      "type": "array of string",
+      "required": false,
+      "description": "List of allowed actions on this device.",
+      "example": ["x:devices:samsung.com", "r:devices:*"]
+    }
+  ]
+}

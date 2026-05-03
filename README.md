@@ -17,7 +17,7 @@ Consumer Electronics, Developer Platform, IoT, Mobile, Smart Home, Smart TV, Wea
 
 ### SmartThings API
 
-The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, and building smart home integrations. Base URL: `https://api.smartthings.com/v1`. Supports OAuth 2.0.
+The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Base URL: `https://api.smartthings.com/v1`. Supports OAuth 2.0 Bearer tokens and personal access tokens.
 
 #### Tags
 
@@ -27,6 +27,7 @@ Automations, Connected Devices, IoT, Locations, Rules, Scenes, Smart Home, Smart
 
 - [Documentation](https://developer.smartthings.com/docs/)
 - [Documentation](https://developer.smartthings.com/docs/api/public) — API Reference
+- [OpenAPI](openapi/samsung-smartthings-openapi.yml) — SmartThings REST API
 
 ### Knox Cloud APIs
 
@@ -109,13 +110,40 @@ Digital Wallet, Loyalty, Passes, Payments, Wallet
 - [GitHub Organization](https://github.com/SmartThingsCommunity) — SmartThings Community
 - [GitHub Organization](https://github.com/samsung) — Samsung GitHub
 
+## OpenAPI Specifications
+
+- [openapi/samsung-smartthings-openapi.yml](openapi/samsung-smartthings-openapi.yml) — SmartThings REST API (devices, locations, rooms, scenes, rules, subscriptions, apps)
+
+## Rules
+
+- [rules/samsung-rules.yml](rules/samsung-rules.yml) — Samsung API Spectral Rules
+
+## Capabilities
+
+### Shared Definitions
+
+- [capabilities/shared/smartthings.yaml](capabilities/shared/smartthings.yaml) — Samsung SmartThings API (devices, locations, scenes, rules, subscriptions)
+
+### Workflow Capabilities
+
+- [capabilities/smart-home-control.yaml](capabilities/smart-home-control.yaml) — Smart Home Control (device control, location management, scenes, automation rules, subscriptions)
+
 ## JSON Schema
 
 - [json-schema/samsung-smartthings-device-schema.json](json-schema/samsung-smartthings-device-schema.json) — SmartThings Device
 
+## JSON Structure
+
+- [json-structure/samsung-smartthings-device-structure.json](json-structure/samsung-smartthings-device-structure.json) — SmartThings Device Field Hierarchy
+
 ## JSON-LD
 
 - [json-ld/samsung-context.jsonld](json-ld/samsung-context.jsonld) — Samsung JSON-LD Context
+
+## Examples
+
+- [examples/samsung-list-devices-example.json](examples/samsung-list-devices-example.json) — List SmartThings Devices Request/Response
+- [examples/samsung-execute-device-command-example.json](examples/samsung-execute-device-command-example.json) — Execute Device Command Request/Response
 
 ## Vocabulary
 
