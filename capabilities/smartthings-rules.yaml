@@ -1,0 +1,252 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Samsung SmartThings API — Rules
+  description: 'Samsung SmartThings API — Rules. 5 operations. Lead operation: List Rules. Self-contained Naftiko capability
+    covering one Samsung business surface.'
+  tags:
+  - Samsung
+  - Rules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAMSUNG_API_KEY: SAMSUNG_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smartthings-rules
+    baseUri: https://api.smartthings.com/v1
+    description: Samsung SmartThings API — Rules business capability. Self-contained, no shared references.
+    resources:
+    - name: rules
+      path: /rules
+      operations:
+      - name: listrules
+        method: GET
+        description: List Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locationId
+          in: query
+          type: string
+          description: Filter rules by location ID.
+        - name: max
+          in: query
+          type: integer
+          description: Maximum number of rules to return.
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset.
+      - name: createrule
+        method: POST
+        description: Create Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locationId
+          in: query
+          type: string
+          description: Location ID where the rule will be created.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rules-ruleId
+      path: /rules/{ruleId}
+      operations:
+      - name: getrule
+        method: GET
+        description: Get Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locationId
+          in: query
+          type: string
+          description: Location ID of the rule.
+          required: true
+      - name: updaterule
+        method: PUT
+        description: Update Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locationId
+          in: query
+          type: string
+          description: Location ID of the rule.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleterule
+        method: DELETE
+        description: Delete Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locationId
+          in: query
+          type: string
+          description: Location ID of the rule.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAMSUNG_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: smartthings-rules-rest
+    port: 8080
+    description: REST adapter for Samsung SmartThings API — Rules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/rules
+      name: rules
+      description: REST surface for rules.
+      operations:
+      - method: GET
+        name: listrules
+        description: List Rules
+        call: smartthings-rules.listrules
+        with:
+          locationId: rest.locationId
+          max: rest.max
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrule
+        description: Create Rule
+        call: smartthings-rules.createrule
+        with:
+          locationId: rest.locationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rules/{ruleid}
+      name: rules-ruleid
+      description: REST surface for rules-ruleId.
+      operations:
+      - method: GET
+        name: getrule
+        description: Get Rule
+        call: smartthings-rules.getrule
+        with:
+          locationId: rest.locationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updaterule
+        description: Update Rule
+        call: smartthings-rules.updaterule
+        with:
+          locationId: rest.locationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleterule
+        description: Delete Rule
+        call: smartthings-rules.deleterule
+        with:
+          locationId: rest.locationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smartthings-rules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Samsung SmartThings API — Rules. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-rules
+      description: List Rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smartthings-rules.listrules
+      with:
+        locationId: tools.locationId
+        max: tools.max
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-rule
+      description: Create Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smartthings-rules.createrule
+      with:
+        locationId: tools.locationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-rule
+      description: Get Rule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smartthings-rules.getrule
+      with:
+        locationId: tools.locationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-rule
+      description: Update Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: smartthings-rules.updaterule
+      with:
+        locationId: tools.locationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-rule
+      description: Delete Rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: smartthings-rules.deleterule
+      with:
+        locationId: tools.locationId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Samsung SmartThings API — Subscriptions
+  description: 'Samsung SmartThings API — Subscriptions. 3 operations. Lead operation: List Subscriptions. Self-contained
+    Naftiko capability covering one Samsung business surface.'
+  tags:
+  - Samsung
+  - Subscriptions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAMSUNG_API_KEY: SAMSUNG_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smartthings-subscriptions
+    baseUri: https://api.smartthings.com/v1
+    description: Samsung SmartThings API — Subscriptions business capability. Self-contained, no shared references.
+    resources:
+    - name: subscriptions
+      path: /subscriptions
+      operations:
+      - name: listsubscriptions
+        method: GET
+        description: List Subscriptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: installedAppId
+          in: query
+          type: string
+          description: Filter subscriptions by installed app ID.
+      - name: createsubscription
+        method: POST
+        description: Create Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: subscriptions-subscriptionId
+      path: /subscriptions/{subscriptionId}
+      operations:
+      - name: deletesubscription
+        method: DELETE
+        description: Delete Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subscriptionId
+          in: path
+          type: string
+          description: Subscription ID.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAMSUNG_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: smartthings-subscriptions-rest
+    port: 8080
+    description: REST adapter for Samsung SmartThings API — Subscriptions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/subscriptions
+      name: subscriptions
+      description: REST surface for subscriptions.
+      operations:
+      - method: GET
+        name: listsubscriptions
+        description: List Subscriptions
+        call: smartthings-subscriptions.listsubscriptions
+        with:
+          installedAppId: rest.installedAppId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsubscription
+        description: Create Subscription
+        call: smartthings-subscriptions.createsubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/subscriptions/{subscriptionid}
+      name: subscriptions-subscriptionid
+      description: REST surface for subscriptions-subscriptionId.
+      operations:
+      - method: DELETE
+        name: deletesubscription
+        description: Delete Subscription
+        call: smartthings-subscriptions.deletesubscription
+        with:
+          subscriptionId: rest.subscriptionId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smartthings-subscriptions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Samsung SmartThings API — Subscriptions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-subscriptions
+      description: List Subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smartthings-subscriptions.listsubscriptions
+      with:
+        installedAppId: tools.installedAppId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-subscription
+      description: Create Subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smartthings-subscriptions.createsubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-subscription
+      description: Delete Subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: smartthings-subscriptions.deletesubscription
+      with:
+        subscriptionId: tools.subscriptionId
+      outputParameters:
+      - type: object
+        mapping: $.
