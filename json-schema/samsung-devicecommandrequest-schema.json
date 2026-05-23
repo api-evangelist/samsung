@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DeviceCommandRequest",
+  "title": "DeviceCommandRequest",
+  "type": "object",
+  "required": [
+    "commands"
+  ],
+  "properties": {
+    "commands": {
+      "type": "array",
+      "description": "List of commands to execute.",
+      "items": {
+        "type": "object",
+        "required": [
+          "component",
+          "capability",
+          "command"
+        ],
+        "properties": {
+          "component": {
+            "type": "string",
+            "description": "Component ID (e.g., main)."
+          },
+          "capability": {
+            "type": "string",
+            "description": "Capability ID (e.g., switch, lock)."
+          },
+          "command": {
+            "type": "string",
+            "description": "Command name (e.g., on, off, lock, unlock)."
+          },
+          "arguments": {
+            "type": "array",
+            "description": "Command arguments.",
+            "items": {}
+          }
+        }
+      }
+    }
+  }
+}

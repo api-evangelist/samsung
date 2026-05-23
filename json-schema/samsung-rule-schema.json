@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Rule",
+  "title": "Rule",
+  "type": "object",
+  "description": "A SmartThings automation rule.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique rule identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Rule name."
+    },
+    "actions": {
+      "type": "array",
+      "description": "Actions to execute when rule conditions are met.",
+      "items": {}
+    },
+    "timeZoneId": {
+      "type": "string",
+      "description": "IANA time zone for time-based conditions."
+    },
+    "executionLocation": {
+      "type": "string",
+      "description": "Where the rule executes.",
+      "enum": [
+        "Cloud",
+        "Local"
+      ]
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "Owner user ID."
+    }
+  }
+}

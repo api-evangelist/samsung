@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateLocationRequest",
+  "title": "CreateLocationRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Location name."
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-3 country code."
+    },
+    "latitude": {
+      "type": "number",
+      "format": "double"
+    },
+    "longitude": {
+      "type": "number",
+      "format": "double"
+    },
+    "regionRadius": {
+      "type": "integer",
+      "description": "Geofence radius in meters."
+    },
+    "temperatureScale": {
+      "type": "string",
+      "enum": [
+        "F",
+        "C"
+      ]
+    },
+    "timeZoneId": {
+      "type": "string",
+      "description": "IANA time zone ID."
+    },
+    "locale": {
+      "type": "string"
+    }
+  }
+}

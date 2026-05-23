@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Links",
+  "title": "Links",
+  "type": "object",
+  "description": "Pagination links.",
+  "properties": {
+    "next": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "URL to the next page."
+        }
+      }
+    },
+    "previous": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "URL to the previous page."
+        }
+      }
+    }
+  }
+}

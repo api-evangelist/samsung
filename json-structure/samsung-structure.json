@@ -1,0 +1,321 @@
+{
+  "provider": "Samsung",
+  "providerId": "samsung",
+  "kind": "json-structure",
+  "description": "Structural overview of the Samsung API surface; extracted from openapi/.",
+  "schemaCount": 14,
+  "operationCount": 24,
+  "schemas": [
+    {
+      "name": "Device",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "DeviceComponent",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "DeviceStatus",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "DeviceCommandRequest",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "commands"
+      ]
+    },
+    {
+      "name": "Location",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "CreateLocationRequest",
+      "type": "object",
+      "propertyCount": 8,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "Room",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Scene",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "Rule",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "CreateRuleRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name",
+        "actions"
+      ]
+    },
+    {
+      "name": "Subscription",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CreateSubscriptionRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "sourceType"
+      ]
+    },
+    {
+      "name": "App",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "Links",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/devices",
+      "operationId": "listDevices",
+      "summary": "List Devices",
+      "tags": [
+        "Devices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/devices/{deviceId}",
+      "operationId": "getDevice",
+      "summary": "Get Device",
+      "tags": [
+        "Devices"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/devices/{deviceId}",
+      "operationId": "deleteDevice",
+      "summary": "Delete Device",
+      "tags": [
+        "Devices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/devices/{deviceId}/status",
+      "operationId": "getDeviceStatus",
+      "summary": "Get Device Status",
+      "tags": [
+        "Devices"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/devices/{deviceId}/commands",
+      "operationId": "executeDeviceCommands",
+      "summary": "Execute Device Commands",
+      "tags": [
+        "Devices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/locations",
+      "operationId": "listLocations",
+      "summary": "List Locations",
+      "tags": [
+        "Locations"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/locations",
+      "operationId": "createLocation",
+      "summary": "Create Location",
+      "tags": [
+        "Locations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/locations/{locationId}",
+      "operationId": "getLocation",
+      "summary": "Get Location",
+      "tags": [
+        "Locations"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/locations/{locationId}",
+      "operationId": "updateLocation",
+      "summary": "Update Location",
+      "tags": [
+        "Locations"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/locations/{locationId}",
+      "operationId": "deleteLocation",
+      "summary": "Delete Location",
+      "tags": [
+        "Locations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/locations/{locationId}/rooms",
+      "operationId": "listRooms",
+      "summary": "List Rooms",
+      "tags": [
+        "Locations"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/locations/{locationId}/rooms",
+      "operationId": "createRoom",
+      "summary": "Create Room",
+      "tags": [
+        "Locations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/scenes",
+      "operationId": "listScenes",
+      "summary": "List Scenes",
+      "tags": [
+        "Scenes"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/scenes/{sceneId}/execute",
+      "operationId": "executeScene",
+      "summary": "Execute Scene",
+      "tags": [
+        "Scenes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/rules",
+      "operationId": "listRules",
+      "summary": "List Rules",
+      "tags": [
+        "Rules"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/rules",
+      "operationId": "createRule",
+      "summary": "Create Rule",
+      "tags": [
+        "Rules"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/rules/{ruleId}",
+      "operationId": "getRule",
+      "summary": "Get Rule",
+      "tags": [
+        "Rules"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/rules/{ruleId}",
+      "operationId": "updateRule",
+      "summary": "Update Rule",
+      "tags": [
+        "Rules"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/rules/{ruleId}",
+      "operationId": "deleteRule",
+      "summary": "Delete Rule",
+      "tags": [
+        "Rules"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions",
+      "operationId": "listSubscriptions",
+      "summary": "List Subscriptions",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions",
+      "operationId": "createSubscription",
+      "summary": "Create Subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/subscriptions/{subscriptionId}",
+      "operationId": "deleteSubscription",
+      "summary": "Delete Subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps",
+      "operationId": "listApps",
+      "summary": "List Apps",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps/{appId}",
+      "operationId": "getApp",
+      "summary": "Get App",
+      "tags": [
+        "Apps"
+      ]
+    }
+  ]
+}

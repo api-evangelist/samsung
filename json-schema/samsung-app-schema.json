@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/App",
+  "title": "App",
+  "type": "object",
+  "description": "A SmartThings SmartApp.",
+  "properties": {
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique app identifier."
+    },
+    "appName": {
+      "type": "string",
+      "description": "App identifier name."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable app name."
+    },
+    "description": {
+      "type": "string",
+      "description": "App description."
+    },
+    "singleInstance": {
+      "type": "boolean",
+      "description": "Whether app allows only one installed instance."
+    },
+    "appType": {
+      "type": "string",
+      "description": "App type.",
+      "enum": [
+        "WEBHOOK_SMART_APP",
+        "LAMBDA_SMART_APP",
+        "API_ONLY"
+      ]
+    },
+    "principalType": {
+      "type": "string",
+      "description": "Authentication principal type.",
+      "enum": [
+        "LOCATION",
+        "USER_LEVEL"
+      ]
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "App creation timestamp."
+    },
+    "lastUpdatedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "App last updated timestamp."
+    }
+  }
+}

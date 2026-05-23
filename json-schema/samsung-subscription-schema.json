@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Subscription",
+  "title": "Subscription",
+  "type": "object",
+  "description": "A SmartThings event subscription for a SmartApp.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique subscription identifier."
+    },
+    "installedAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Installed SmartApp ID."
+    },
+    "sourceType": {
+      "type": "string",
+      "description": "Event source type.",
+      "enum": [
+        "CAPABILITY",
+        "DEVICE",
+        "MODE",
+        "TIMER",
+        "SCENE_LIFECYCLE",
+        "DEVICE_LIFECYCLE"
+      ]
+    },
+    "device": {
+      "type": "object",
+      "description": "Device capability subscription details.",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device ID to subscribe to (or * for all)."
+        },
+        "componentId": {
+          "type": "string",
+          "description": "Component ID (or * for all)."
+        },
+        "capability": {
+          "type": "string",
+          "description": "Capability ID."
+        },
+        "attribute": {
+          "type": "string",
+          "description": "Attribute name (or * for all)."
+        },
+        "value": {
+          "description": "Attribute value filter."
+        },
+        "stateChangeOnly": {
+          "type": "boolean",
+          "description": "Only trigger on attribute state changes."
+        }
+      }
+    }
+  }
+}

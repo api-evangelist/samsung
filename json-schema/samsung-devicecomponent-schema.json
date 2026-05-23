@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DeviceComponent",
+  "title": "DeviceComponent",
+  "type": "object",
+  "description": "A functional component of a SmartThings device.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Component ID (e.g., main, sub)."
+    },
+    "label": {
+      "type": "string",
+      "description": "Human-readable component label."
+    },
+    "capabilities": {
+      "type": "array",
+      "description": "Capabilities this component supports.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Capability ID (e.g., switch, lock)."
+          },
+          "version": {
+            "type": "integer",
+            "description": "Capability version."
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "Device category classifications.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Category name."
+          },
+          "categoryType": {
+            "type": "string",
+            "enum": [
+              "manufacturer",
+              "user"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

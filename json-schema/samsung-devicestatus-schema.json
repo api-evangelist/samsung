@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DeviceStatus",
+  "title": "DeviceStatus",
+  "type": "object",
+  "description": "Full status of all device components and capability attributes.",
+  "properties": {
+    "components": {
+      "type": "object",
+      "description": "Map of component IDs to capability status objects. Each capability contains attribute name/value pairs with timestamps.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "description": "Current attribute value."
+            },
+            "unit": {
+              "type": "string",
+              "description": "Unit of measurement (if applicable)."
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp of last update."
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "operationId": "executeDeviceCommands",
+  "method": "POST",
+  "path": "/devices/{deviceId}/commands",
+  "summary": "Execute Device Commands",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "TurnOn",
+      "example": {
+        "commands": [
+          {
+            "component": "main",
+            "capability": "switch",
+            "command": true
+          }
+        ]
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "Lock",
+      "example": {
+        "commands": [
+          {
+            "component": "main",
+            "capability": "lock",
+            "command": "lock"
+          }
+        ]
+      }
+    }
+  ],
+  "responseExamples": []
+}

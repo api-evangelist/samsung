@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Location",
+  "title": "Location",
+  "type": "object",
+  "description": "A SmartThings location (home, office, etc.).",
+  "properties": {
+    "locationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique location identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Location name."
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-3 country code."
+    },
+    "latitude": {
+      "type": "number",
+      "format": "double",
+      "description": "Location latitude."
+    },
+    "longitude": {
+      "type": "number",
+      "format": "double",
+      "description": "Location longitude."
+    },
+    "regionRadius": {
+      "type": "integer",
+      "description": "Geofence radius in meters."
+    },
+    "temperatureScale": {
+      "type": "string",
+      "enum": [
+        "F",
+        "C"
+      ],
+      "description": "Temperature unit preference."
+    },
+    "timeZoneId": {
+      "type": "string",
+      "description": "IANA time zone ID (e.g., America/Chicago)."
+    },
+    "locale": {
+      "type": "string",
+      "description": "BCP 47 locale tag."
+    }
+  }
+}

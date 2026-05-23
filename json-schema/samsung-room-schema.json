@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Room",
+  "title": "Room",
+  "type": "object",
+  "description": "A room within a SmartThings location.",
+  "properties": {
+    "roomId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique room identifier."
+    },
+    "locationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Location this room belongs to."
+    },
+    "name": {
+      "type": "string",
+      "description": "Room name."
+    },
+    "backgroundImage": {
+      "type": "string",
+      "description": "Room background image URL."
+    }
+  }
+}

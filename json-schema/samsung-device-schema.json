@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Device",
+  "title": "Device",
+  "type": "object",
+  "description": "A SmartThings connected device.",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique device identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Device display name."
+    },
+    "label": {
+      "type": "string",
+      "description": "User-assigned device label."
+    },
+    "manufacturerName": {
+      "type": "string",
+      "description": "Manufacturer name."
+    },
+    "presentationId": {
+      "type": "string",
+      "description": "Device presentation identifier."
+    },
+    "locationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Location ID this device belongs to."
+    },
+    "roomId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Room ID this device is assigned to."
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "Owner user ID."
+    },
+    "type": {
+      "type": "string",
+      "description": "Device integration type.",
+      "enum": [
+        "ENDPOINT_APP",
+        "DTH",
+        "MOBILE",
+        "VIPER",
+        "MATTER",
+        "LAN",
+        "BLE",
+        "ZWave",
+        "Zigbee",
+        "HUB"
+      ]
+    },
+    "components": {
+      "type": "array",
+      "description": "Functional sub-units of the device (main, sub).",
+      "items": {
+        "$ref": "#/components/schemas/DeviceComponent"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateRuleRequest",
+  "title": "CreateRuleRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "actions"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Rule name."
+    },
+    "actions": {
+      "type": "array",
+      "description": "Rule action definitions.",
+      "items": {}
+    },
+    "timeZoneId": {
+      "type": "string",
+      "description": "IANA time zone for time-based conditions."
+    }
+  }
+}

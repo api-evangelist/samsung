@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Scene",
+  "title": "Scene",
+  "type": "object",
+  "description": "A SmartThings scene (saved device state configuration).",
+  "properties": {
+    "sceneId": {
+      "type": "string",
+      "description": "Unique scene identifier."
+    },
+    "sceneName": {
+      "type": "string",
+      "description": "Scene name."
+    },
+    "sceneIcon": {
+      "type": "string",
+      "description": "Scene icon identifier."
+    },
+    "sceneColor": {
+      "type": "string",
+      "description": "Scene color theme."
+    },
+    "locationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Location this scene belongs to."
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User ID who created the scene."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scene creation timestamp."
+    },
+    "lastUpdatedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scene last updated timestamp."
+    },
+    "lastExecutedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of last scene execution."
+    }
+  }
+}
