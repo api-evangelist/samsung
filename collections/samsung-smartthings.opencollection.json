@@ -1,0 +1,578 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Samsung SmartThings API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/devices",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter devices by location ID."
+              },
+              {
+                "name": "capabilityId",
+                "value": "",
+                "type": "query",
+                "description": "Filter devices by SmartThings capability (e.g., switch, lock)."
+              },
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific device IDs (repeatable)."
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of devices to return (max 200)."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Cursor token for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of devices accessible to the authenticated user, optionally filtered by location, capability, or device type."
+        },
+        {
+          "info": {
+            "name": "Get Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific device by its ID."
+        },
+        {
+          "info": {
+            "name": "Delete Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Deletes a device from the SmartThings platform."
+        },
+        {
+          "info": {
+            "name": "Get Device Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId/status",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns the full status of all components and capabilities for a device, including current attribute values."
+        },
+        {
+          "info": {
+            "name": "Execute Device Commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId/commands",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes one or more commands on a device component. Commands invoke capability command methods (e.g., switch.on, lock.lock, thermostat.setCoolingSetpoint)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/locations",
+            "params": [
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor."
+              }
+            ]
+          },
+          "docs": "Returns all SmartThings locations accessible to the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/locations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new SmartThings location."
+        },
+        {
+          "info": {
+            "name": "Get Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/locations/:locationId",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique location identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific SmartThings location."
+        },
+        {
+          "info": {
+            "name": "Update Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smartthings.com/v1/locations/:locationId",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique location identifier (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a SmartThings location's properties."
+        },
+        {
+          "info": {
+            "name": "Delete Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smartthings.com/v1/locations/:locationId",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique location identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Deletes a SmartThings location and all associated devices and automations."
+        },
+        {
+          "info": {
+            "name": "List Rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/locations/:locationId/rooms",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique location identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns all rooms within a SmartThings location."
+        },
+        {
+          "info": {
+            "name": "Create Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/locations/:locationId/rooms",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique location identifier (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new room within a SmartThings location."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scenes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scenes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/scenes",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter scenes by location ID."
+              }
+            ]
+          },
+          "docs": "Returns all scenes for the authenticated user, optionally filtered by location."
+        },
+        {
+          "info": {
+            "name": "Execute Scene",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/scenes/:sceneId/execute",
+            "params": [
+              {
+                "name": "sceneId",
+                "value": "",
+                "type": "path",
+                "description": "Scene ID."
+              }
+            ]
+          },
+          "docs": "Activates a SmartThings scene, applying its saved device state configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/rules",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter rules by location ID."
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rules to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              }
+            ]
+          },
+          "docs": "Returns all automation rules for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/rules",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Location ID where the rule will be created."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new SmartThings automation rule with trigger conditions and actions."
+        },
+        {
+          "info": {
+            "name": "Get Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule identifier."
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Location ID of the rule."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific automation rule."
+        },
+        {
+          "info": {
+            "name": "Update Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.smartthings.com/v1/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule identifier."
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Location ID of the rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing SmartThings automation rule."
+        },
+        {
+          "info": {
+            "name": "Delete Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smartthings.com/v1/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique rule identifier."
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Location ID of the rule."
+              }
+            ]
+          },
+          "docs": "Deletes a SmartThings automation rule."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/subscriptions",
+            "params": [
+              {
+                "name": "installedAppId",
+                "value": "",
+                "type": "query",
+                "description": "Filter subscriptions by installed app ID."
+              }
+            ]
+          },
+          "docs": "Returns all event subscriptions for the authenticated app."
+        },
+        {
+          "info": {
+            "name": "Create Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/subscriptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an event subscription to receive device capability events, location mode changes, or scene lifecycle events for a SmartApp."
+        },
+        {
+          "info": {
+            "name": "Delete Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smartthings.com/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID."
+              }
+            ]
+          },
+          "docs": "Removes an event subscription."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/apps"
+          },
+          "docs": "Returns all SmartApps registered to the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Get App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/apps/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "App ID or app name."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific SmartApp."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
