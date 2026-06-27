@@ -173,10 +173,10 @@ common:
   - type: JSONLDContext
     url: json-ld/samsung-context.jsonld
     title: Samsung JSON-LD Context
-  - type: Example
+  - type: Examples
     url: examples/samsung-list-devices-example.json
     title: Samsung SmartThings List Devices Example
-  - type: Example
+  - type: Examples
     url: examples/samsung-execute-device-command-example.json
     title: Samsung SmartThings Execute Device Command Example
   - type: Vocabulary
