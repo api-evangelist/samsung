@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/samsung-smartthings-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: OAuth 2.0 Bearer token or SmartThings personal access token. Obtain tokens at
+    https://account.smartthings.com/tokens.
+  sources:
+  - openapi/samsung-smartthings-openapi.yml

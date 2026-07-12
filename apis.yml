@@ -144,6 +144,12 @@ apis:
       - type: Documentation
         url: https://developer.samsung.com/wallet
 common:
+  - type: DomainSecurity
+    url: security/samsung-domain-security.yml
+  - type: Authentication
+    url: authentication/samsung-authentication.yml
+  - url: https://developer.samsung.com/blog
+    type: Blog
   - type: LinkedIn
     url: https://www.linkedin.com/company/samsung-electronics
   - type: Documentation
