@@ -144,6 +144,8 @@ apis:
       - type: Documentation
         url: https://developer.samsung.com/wallet
 common:
+  - type: AgenticAccess
+    url: agentic-access/samsung-agentic-access.yml
   - type: DomainSecurity
     url: security/samsung-domain-security.yml
   - type: Authentication
