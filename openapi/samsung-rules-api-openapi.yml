@@ -1,0 +1,248 @@
+openapi: 3.0.3
+info:
+  title: Samsung SmartThings Apps Rules API
+  description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
+  version: 1.0.0
+  contact:
+    name: SmartThings Developer Support
+    url: https://developer.smartthings.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://api.smartthings.com/v1
+  description: SmartThings REST API
+security:
+- BearerAuth: []
+tags:
+- name: Rules
+  description: Automation rule management.
+paths:
+  /rules:
+    get:
+      operationId: listRules
+      summary: List Rules
+      description: Returns all automation rules for the authenticated user.
+      tags:
+      - Rules
+      parameters:
+      - name: locationId
+        in: query
+        required: false
+        description: Filter rules by location ID.
+        schema:
+          type: string
+          format: uuid
+      - name: max
+        in: query
+        required: false
+        description: Maximum number of rules to return.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        description: Pagination offset.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of rules.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Rule'
+                  _links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: createRule
+      summary: Create Rule
+      description: Creates a new SmartThings automation rule with trigger conditions and actions.
+      tags:
+      - Rules
+      parameters:
+      - name: locationId
+        in: query
+        required: true
+        description: Location ID where the rule will be created.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+      responses:
+        '200':
+          description: Rule created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized.
+        '422':
+          description: Validation error.
+  /rules/{ruleId}:
+    get:
+      operationId: getRule
+      summary: Get Rule
+      description: Returns details for a specific automation rule.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/RuleIdParam'
+      - name: locationId
+        in: query
+        required: true
+        description: Location ID of the rule.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Rule details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Rule not found.
+    put:
+      operationId: updateRule
+      summary: Update Rule
+      description: Updates an existing SmartThings automation rule.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/RuleIdParam'
+      - name: locationId
+        in: query
+        required: true
+        description: Location ID of the rule.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+      responses:
+        '200':
+          description: Rule updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Rule not found.
+    delete:
+      operationId: deleteRule
+      summary: Delete Rule
+      description: Deletes a SmartThings automation rule.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/RuleIdParam'
+      - name: locationId
+        in: query
+        required: true
+        description: Location ID of the rule.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Rule deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Rule not found.
+components:
+  parameters:
+    RuleIdParam:
+      name: ruleId
+      in: path
+      required: true
+      description: Unique rule identifier.
+      schema:
+        type: string
+  schemas:
+    Rule:
+      type: object
+      description: A SmartThings automation rule.
+      properties:
+        id:
+          type: string
+          description: Unique rule identifier.
+        name:
+          type: string
+          description: Rule name.
+        actions:
+          type: array
+          description: Actions to execute when rule conditions are met.
+          items: {}
+        timeZoneId:
+          type: string
+          description: IANA time zone for time-based conditions.
+        executionLocation:
+          type: string
+          description: Where the rule executes.
+          enum:
+          - Cloud
+          - Local
+        ownerId:
+          type: string
+          description: Owner user ID.
+    CreateRuleRequest:
+      type: object
+      required:
+      - name
+      - actions
+      properties:
+        name:
+          type: string
+          description: Rule name.
+        actions:
+          type: array
+          description: Rule action definitions.
+          items: {}
+        timeZoneId:
+          type: string
+          description: IANA time zone for time-based conditions.
+    Links:
+      type: object
+      description: Pagination links.
+      properties:
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the next page.
+        previous:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the previous page.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token or SmartThings personal access token. Obtain tokens at https://account.smartthings.com/tokens.

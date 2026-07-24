@@ -1,0 +1,359 @@
+openapi: 3.0.3
+info:
+  title: Samsung SmartThings Apps Devices API
+  description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
+  version: 1.0.0
+  contact:
+    name: SmartThings Developer Support
+    url: https://developer.smartthings.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://api.smartthings.com/v1
+  description: SmartThings REST API
+security:
+- BearerAuth: []
+tags:
+- name: Devices
+  description: Connected device management and control.
+paths:
+  /devices:
+    get:
+      operationId: listDevices
+      summary: List Devices
+      description: Returns a list of devices accessible to the authenticated user, optionally filtered by location, capability, or device type.
+      tags:
+      - Devices
+      parameters:
+      - name: locationId
+        in: query
+        required: false
+        description: Filter devices by location ID.
+        schema:
+          type: string
+          format: uuid
+      - name: capabilityId
+        in: query
+        required: false
+        description: Filter devices by SmartThings capability (e.g., switch, lock).
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        required: false
+        description: Filter by specific device IDs (repeatable).
+        schema:
+          type: array
+          items:
+            type: string
+      - name: max
+        in: query
+        required: false
+        description: Maximum number of devices to return (max 200).
+        schema:
+          type: integer
+          maximum: 200
+      - name: pageToken
+        in: query
+        required: false
+        description: Cursor token for pagination.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of devices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Device'
+                  _links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+  /devices/{deviceId}:
+    get:
+      operationId: getDevice
+      summary: Get Device
+      description: Returns details for a specific device by its ID.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      responses:
+        '200':
+          description: Device details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Device not found.
+    delete:
+      operationId: deleteDevice
+      summary: Delete Device
+      description: Deletes a device from the SmartThings platform.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      responses:
+        '200':
+          description: Device deleted.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '404':
+          description: Device not found.
+  /devices/{deviceId}/status:
+    get:
+      operationId: getDeviceStatus
+      summary: Get Device Status
+      description: Returns the full status of all components and capabilities for a device, including current attribute values.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      responses:
+        '200':
+          description: Device status with component attribute values.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceStatus'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Device not found.
+  /devices/{deviceId}/commands:
+    post:
+      operationId: executeDeviceCommands
+      summary: Execute Device Commands
+      description: Executes one or more commands on a device component. Commands invoke capability command methods (e.g., switch.on, lock.lock, thermostat.setCoolingSetpoint).
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceCommandRequest'
+            examples:
+              TurnOn:
+                summary: Turn on a switch
+                value:
+                  commands:
+                  - component: main
+                    capability: switch
+                    command: true
+              Lock:
+                summary: Lock a lock
+                value:
+                  commands:
+                  - component: main
+                    capability: lock
+                    command: lock
+      responses:
+        '200':
+          description: Commands accepted for execution.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        status:
+                          type: string
+                          enum:
+                          - ACCEPTED
+                          - COMPLETED
+                          - ERROR
+        '401':
+          description: Unauthorized.
+        '422':
+          description: Invalid command or capability.
+components:
+  schemas:
+    DeviceCommandRequest:
+      type: object
+      required:
+      - commands
+      properties:
+        commands:
+          type: array
+          description: List of commands to execute.
+          items:
+            type: object
+            required:
+            - component
+            - capability
+            - command
+            properties:
+              component:
+                type: string
+                description: Component ID (e.g., main).
+              capability:
+                type: string
+                description: Capability ID (e.g., switch, lock).
+              command:
+                type: string
+                description: Command name (e.g., on, off, lock, unlock).
+              arguments:
+                type: array
+                description: Command arguments.
+                items: {}
+    DeviceStatus:
+      type: object
+      description: Full status of all device components and capability attributes.
+      properties:
+        components:
+          type: object
+          description: Map of component IDs to capability status objects. Each capability contains attribute name/value pairs with timestamps.
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                value:
+                  description: Current attribute value.
+                unit:
+                  type: string
+                  description: Unit of measurement (if applicable).
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: Timestamp of last update.
+    Device:
+      type: object
+      description: A SmartThings connected device.
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+          description: Unique device identifier.
+        name:
+          type: string
+          description: Device display name.
+        label:
+          type: string
+          description: User-assigned device label.
+        manufacturerName:
+          type: string
+          description: Manufacturer name.
+        presentationId:
+          type: string
+          description: Device presentation identifier.
+        locationId:
+          type: string
+          format: uuid
+          description: Location ID this device belongs to.
+        roomId:
+          type: string
+          format: uuid
+          description: Room ID this device is assigned to.
+        ownerId:
+          type: string
+          description: Owner user ID.
+        type:
+          type: string
+          description: Device integration type.
+          enum:
+          - ENDPOINT_APP
+          - DTH
+          - MOBILE
+          - VIPER
+          - MATTER
+          - LAN
+          - BLE
+          - ZWave
+          - Zigbee
+          - HUB
+        components:
+          type: array
+          description: Functional sub-units of the device (main, sub).
+          items:
+            $ref: '#/components/schemas/DeviceComponent'
+    Links:
+      type: object
+      description: Pagination links.
+      properties:
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the next page.
+        previous:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the previous page.
+    DeviceComponent:
+      type: object
+      description: A functional component of a SmartThings device.
+      properties:
+        id:
+          type: string
+          description: Component ID (e.g., main, sub).
+        label:
+          type: string
+          description: Human-readable component label.
+        capabilities:
+          type: array
+          description: Capabilities this component supports.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Capability ID (e.g., switch, lock).
+              version:
+                type: integer
+                description: Capability version.
+        categories:
+          type: array
+          description: Device category classifications.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Category name.
+              categoryType:
+                type: string
+                enum:
+                - manufacturer
+                - user
+  parameters:
+    DeviceIdParam:
+      name: deviceId
+      in: path
+      required: true
+      description: Unique device identifier (UUID).
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token or SmartThings personal access token. Obtain tokens at https://account.smartthings.com/tokens.

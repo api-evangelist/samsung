@@ -1,0 +1,168 @@
+openapi: 3.0.3
+info:
+  title: Samsung SmartThings Apps Subscriptions API
+  description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
+  version: 1.0.0
+  contact:
+    name: SmartThings Developer Support
+    url: https://developer.smartthings.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://api.smartthings.com/v1
+  description: SmartThings REST API
+security:
+- BearerAuth: []
+tags:
+- name: Subscriptions
+  description: Device event subscriptions.
+paths:
+  /subscriptions:
+    get:
+      operationId: listSubscriptions
+      summary: List Subscriptions
+      description: Returns all event subscriptions for the authenticated app.
+      tags:
+      - Subscriptions
+      parameters:
+      - name: installedAppId
+        in: query
+        required: false
+        description: Filter subscriptions by installed app ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of subscriptions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: createSubscription
+      summary: Create Subscription
+      description: Creates an event subscription to receive device capability events, location mode changes, or scene lifecycle events for a SmartApp.
+      tags:
+      - Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+      responses:
+        '200':
+          description: Subscription created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '401':
+          description: Unauthorized.
+        '422':
+          description: Validation error.
+  /subscriptions/{subscriptionId}:
+    delete:
+      operationId: deleteSubscription
+      summary: Delete Subscription
+      description: Removes an event subscription.
+      tags:
+      - Subscriptions
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        description: Subscription ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Subscription deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Subscription not found.
+components:
+  schemas:
+    Subscription:
+      type: object
+      description: A SmartThings event subscription for a SmartApp.
+      properties:
+        id:
+          type: string
+          description: Unique subscription identifier.
+        installedAppId:
+          type: string
+          format: uuid
+          description: Installed SmartApp ID.
+        sourceType:
+          type: string
+          description: Event source type.
+          enum:
+          - CAPABILITY
+          - DEVICE
+          - MODE
+          - TIMER
+          - SCENE_LIFECYCLE
+          - DEVICE_LIFECYCLE
+        device:
+          type: object
+          description: Device capability subscription details.
+          properties:
+            deviceId:
+              type: string
+              description: Device ID to subscribe to (or * for all).
+            componentId:
+              type: string
+              description: Component ID (or * for all).
+            capability:
+              type: string
+              description: Capability ID.
+            attribute:
+              type: string
+              description: Attribute name (or * for all).
+            value:
+              description: Attribute value filter.
+            stateChangeOnly:
+              type: boolean
+              description: Only trigger on attribute state changes.
+    CreateSubscriptionRequest:
+      type: object
+      required:
+      - sourceType
+      properties:
+        sourceType:
+          type: string
+          enum:
+          - CAPABILITY
+          - DEVICE
+          - MODE
+          - TIMER
+          - SCENE_LIFECYCLE
+          - DEVICE_LIFECYCLE
+        device:
+          type: object
+          properties:
+            deviceId:
+              type: string
+            componentId:
+              type: string
+            capability:
+              type: string
+            attribute:
+              type: string
+            stateChangeOnly:
+              type: boolean
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token or SmartThings personal access token. Obtain tokens at https://account.smartthings.com/tokens.

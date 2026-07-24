@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Samsung SmartThings Apps Locations API
+  description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
+  version: 1.0.0
+  contact:
+    name: SmartThings Developer Support
+    url: https://developer.smartthings.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://api.smartthings.com/v1
+  description: SmartThings REST API
+security:
+- BearerAuth: []
+tags:
+- name: Locations
+  description: Location and room management.
+paths:
+  /locations:
+    get:
+      operationId: listLocations
+      summary: List Locations
+      description: Returns all SmartThings locations accessible to the authenticated user.
+      tags:
+      - Locations
+      parameters:
+      - name: pageToken
+        in: query
+        required: false
+        description: Pagination cursor.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of locations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Location'
+                  _links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: createLocation
+      summary: Create Location
+      description: Creates a new SmartThings location.
+      tags:
+      - Locations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLocationRequest'
+      responses:
+        '200':
+          description: Location created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '401':
+          description: Unauthorized.
+        '422':
+          description: Validation error.
+  /locations/{locationId}:
+    get:
+      operationId: getLocation
+      summary: Get Location
+      description: Returns details for a specific SmartThings location.
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/LocationIdParam'
+      responses:
+        '200':
+          description: Location details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Location not found.
+    put:
+      operationId: updateLocation
+      summary: Update Location
+      description: Updates a SmartThings location's properties.
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/LocationIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLocationRequest'
+      responses:
+        '200':
+          description: Location updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Location not found.
+    delete:
+      operationId: deleteLocation
+      summary: Delete Location
+      description: Deletes a SmartThings location and all associated devices and automations.
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/LocationIdParam'
+      responses:
+        '200':
+          description: Location deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Location not found.
+  /locations/{locationId}/rooms:
+    get:
+      operationId: listRooms
+      summary: List Rooms
+      description: Returns all rooms within a SmartThings location.
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/LocationIdParam'
+      responses:
+        '200':
+          description: List of rooms.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Room'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Location not found.
+    post:
+      operationId: createRoom
+      summary: Create Room
+      description: Creates a new room within a SmartThings location.
+      tags:
+      - Locations
+      parameters:
+      - $ref: '#/components/parameters/LocationIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Room name.
+      responses:
+        '200':
+          description: Room created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '401':
+          description: Unauthorized.
+components:
+  parameters:
+    LocationIdParam:
+      name: locationId
+      in: path
+      required: true
+      description: Unique location identifier (UUID).
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Location:
+      type: object
+      description: A SmartThings location (home, office, etc.).
+      properties:
+        locationId:
+          type: string
+          format: uuid
+          description: Unique location identifier.
+        name:
+          type: string
+          description: Location name.
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        latitude:
+          type: number
+          format: double
+          description: Location latitude.
+        longitude:
+          type: number
+          format: double
+          description: Location longitude.
+        regionRadius:
+          type: integer
+          description: Geofence radius in meters.
+        temperatureScale:
+          type: string
+          enum:
+          - F
+          - C
+          description: Temperature unit preference.
+        timeZoneId:
+          type: string
+          description: IANA time zone ID (e.g., America/Chicago).
+        locale:
+          type: string
+          description: BCP 47 locale tag.
+    CreateLocationRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Location name.
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        regionRadius:
+          type: integer
+          description: Geofence radius in meters.
+        temperatureScale:
+          type: string
+          enum:
+          - F
+          - C
+        timeZoneId:
+          type: string
+          description: IANA time zone ID.
+        locale:
+          type: string
+    Links:
+      type: object
+      description: Pagination links.
+      properties:
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the next page.
+        previous:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the previous page.
+    Room:
+      type: object
+      description: A room within a SmartThings location.
+      properties:
+        roomId:
+          type: string
+          format: uuid
+          description: Unique room identifier.
+        locationId:
+          type: string
+          format: uuid
+          description: Location this room belongs to.
+        name:
+          type: string
+          description: Room name.
+        backgroundImage:
+          type: string
+          description: Room background image URL.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token or SmartThings personal access token. Obtain tokens at https://account.smartthings.com/tokens.

@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: Samsung SmartThings Apps API
+  description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
+  version: 1.0.0
+  contact:
+    name: SmartThings Developer Support
+    url: https://developer.smartthings.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://api.smartthings.com/v1
+  description: SmartThings REST API
+security:
+- BearerAuth: []
+tags:
+- name: Apps
+  description: SmartApp registration and management.
+paths:
+  /apps:
+    get:
+      operationId: listApps
+      summary: List Apps
+      description: Returns all SmartApps registered to the authenticated account.
+      tags:
+      - Apps
+      responses:
+        '200':
+          description: List of apps.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/App'
+        '401':
+          description: Unauthorized.
+  /apps/{appId}:
+    get:
+      operationId: getApp
+      summary: Get App
+      description: Returns details for a specific SmartApp.
+      tags:
+      - Apps
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        description: App ID or app name.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: App details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: App not found.
+components:
+  schemas:
+    App:
+      type: object
+      description: A SmartThings SmartApp.
+      properties:
+        appId:
+          type: string
+          format: uuid
+          description: Unique app identifier.
+        appName:
+          type: string
+          description: App identifier name.
+        displayName:
+          type: string
+          description: Human-readable app name.
+        description:
+          type: string
+          description: App description.
+        singleInstance:
+          type: boolean
+          description: Whether app allows only one installed instance.
+        appType:
+          type: string
+          description: App type.
+          enum:
+          - WEBHOOK_SMART_APP
+          - LAMBDA_SMART_APP
+          - API_ONLY
+        principalType:
+          type: string
+          description: Authentication principal type.
+          enum:
+          - LOCATION
+          - USER_LEVEL
+        createdDate:
+          type: string
+          format: date-time
+          description: App creation timestamp.
+        lastUpdatedDate:
+          type: string
+          format: date-time
+          description: App last updated timestamp.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token or SmartThings personal access token. Obtain tokens at https://account.smartthings.com/tokens.

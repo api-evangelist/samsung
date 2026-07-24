@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Samsung SmartThings Apps Scenes API
+  description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
+  version: 1.0.0
+  contact:
+    name: SmartThings Developer Support
+    url: https://developer.smartthings.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://api.smartthings.com/v1
+  description: SmartThings REST API
+security:
+- BearerAuth: []
+tags:
+- name: Scenes
+  description: Scene activation and management.
+paths:
+  /scenes:
+    get:
+      operationId: listScenes
+      summary: List Scenes
+      description: Returns all scenes for the authenticated user, optionally filtered by location.
+      tags:
+      - Scenes
+      parameters:
+      - name: locationId
+        in: query
+        required: false
+        description: Filter scenes by location ID.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: List of scenes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Scene'
+        '401':
+          description: Unauthorized.
+  /scenes/{sceneId}/execute:
+    post:
+      operationId: executeScene
+      summary: Execute Scene
+      description: Activates a SmartThings scene, applying its saved device state configuration.
+      tags:
+      - Scenes
+      parameters:
+      - name: sceneId
+        in: path
+        required: true
+        description: Scene ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Scene execution initiated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Scene not found.
+components:
+  schemas:
+    Scene:
+      type: object
+      description: A SmartThings scene (saved device state configuration).
+      properties:
+        sceneId:
+          type: string
+          description: Unique scene identifier.
+        sceneName:
+          type: string
+          description: Scene name.
+        sceneIcon:
+          type: string
+          description: Scene icon identifier.
+        sceneColor:
+          type: string
+          description: Scene color theme.
+        locationId:
+          type: string
+          format: uuid
+          description: Location this scene belongs to.
+        createdBy:
+          type: string
+          description: User ID who created the scene.
+        createdDate:
+          type: string
+          format: date-time
+          description: Scene creation timestamp.
+        lastUpdatedDate:
+          type: string
+          format: date-time
+          description: Scene last updated timestamp.
+        lastExecutedDate:
+          type: string
+          format: date-time
+          description: Timestamp of last scene execution.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token or SmartThings personal access token. Obtain tokens at https://account.smartthings.com/tokens.
