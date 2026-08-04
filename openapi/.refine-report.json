@@ -1,0 +1,24 @@
+{
+  "provider": "samsung",
+  "sources": [
+    "samsung-apps-api-openapi.yml",
+    "samsung-devices-api-openapi.yml",
+    "samsung-locations-api-openapi.yml",
+    "samsung-rules-api-openapi.yml",
+    "samsung-scenes-api-openapi.yml",
+    "samsung-subscriptions-api-openapi.yml"
+  ],
+  "outputs": [
+    "samsung-apps-api-openapi.yml",
+    "samsung-devices-api-openapi.yml",
+    "samsung-locations-api-openapi.yml",
+    "samsung-rules-api-openapi.yml",
+    "samsung-scenes-api-openapi.yml",
+    "samsung-subscriptions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
