@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Samsung SmartThings Apps Scenes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scenes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Scenes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/scenes",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter scenes by location ID."
+              }
+            ]
+          },
+          "docs": "Returns all scenes for the authenticated user, optionally filtered by location."
+        },
+        {
+          "info": {
+            "name": "Execute Scene",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/scenes/:sceneId/execute",
+            "params": [
+              {
+                "name": "sceneId",
+                "value": "",
+                "type": "path",
+                "description": "Scene ID."
+              }
+            ]
+          },
+          "docs": "Activates a SmartThings scene, applying its saved device state configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Samsung SmartThings Apps Devices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/devices",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "Filter devices by location ID."
+              },
+              {
+                "name": "capabilityId",
+                "value": "",
+                "type": "query",
+                "description": "Filter devices by SmartThings capability (e.g., switch, lock)."
+              },
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific device IDs (repeatable)."
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of devices to return (max 200)."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Cursor token for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of devices accessible to the authenticated user, optionally filtered by location, capability, or device type."
+        },
+        {
+          "info": {
+            "name": "Get Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific device by its ID."
+        },
+        {
+          "info": {
+            "name": "Delete Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Deletes a device from the SmartThings platform."
+        },
+        {
+          "info": {
+            "name": "Get Device Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId/status",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns the full status of all components and capabilities for a device, including current attribute values."
+        },
+        {
+          "info": {
+            "name": "Execute Device Commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.smartthings.com/v1/devices/:deviceId/commands",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique device identifier (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes one or more commands on a device component. Commands invoke capability command methods (e.g., switch.on, lock.lock, thermostat.setCoolingSetpoint)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

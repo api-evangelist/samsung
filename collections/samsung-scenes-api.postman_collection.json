@@ -1,0 +1,371 @@
+{
+  "item": [
+    {
+      "id": "be0dc30c-cf76-4de3-98f8-f519e6b3cee2",
+      "name": "Scenes",
+      "description": {
+        "content": "Scene activation and management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6cad2b78-7f0e-4b16-85e3-fa3cfadd5121",
+          "name": "List Scenes",
+          "request": {
+            "name": "List Scenes",
+            "description": {
+              "content": "Returns all scenes for the authenticated user, optionally filtered by location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scenes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locationId",
+                  "value": "<uuid>",
+                  "description": "Filter scenes by location ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67e7fc5f-8fb8-497c-b7a7-33973327c6de",
+              "name": "List of scenes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scenes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"sceneId\": \"string\",\n      \"sceneName\": \"string\",\n      \"sceneIcon\": \"string\",\n      \"sceneColor\": \"string\",\n      \"locationId\": \"0ad6da0e-fb47-3d77-b1be-b117578105a6\",\n      \"createdBy\": \"string\",\n      \"createdDate\": \"2019-07-31T05:52:30.917Z\",\n      \"lastUpdatedDate\": \"1969-07-12T22:41:08.552Z\",\n      \"lastExecutedDate\": \"1954-01-14T21:32:39.663Z\"\n    },\n    {\n      \"sceneId\": \"string\",\n      \"sceneName\": \"string\",\n      \"sceneIcon\": \"string\",\n      \"sceneColor\": \"string\",\n      \"locationId\": \"8db1955f-2b74-e564-ef84-d38d4298a554\",\n      \"createdBy\": \"string\",\n      \"createdDate\": \"1955-10-09T23:38:41.458Z\",\n      \"lastUpdatedDate\": \"1983-03-14T09:02:33.919Z\",\n      \"lastExecutedDate\": \"2000-06-12T13:18:42.130Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54997111-9b1b-4a7b-b39f-4459efda699d",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scenes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locationId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c2c49e4-31e3-4d5c-86af-5af0b8ccff9d",
+          "name": "Execute Scene",
+          "request": {
+            "name": "Execute Scene",
+            "description": {
+              "content": "Activates a SmartThings scene, applying its saved device state configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scenes",
+                ":sceneId",
+                "execute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sceneId",
+                  "description": "(Required) Scene ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "988772be-3618-40ac-abc7-99073499db3f",
+              "name": "Scene execution initiated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scenes",
+                    ":sceneId",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sceneId",
+                      "description": "(Required) Scene ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75c74e15-7840-4faf-9494-183670d5df8b",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scenes",
+                    ":sceneId",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sceneId",
+                      "description": "(Required) Scene ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "99ce4976-b3dd-4d7d-ac41-2c8b6c7e0e8c",
+              "name": "Scene not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scenes",
+                    ":sceneId",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sceneId",
+                      "description": "(Required) Scene ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.smartthings.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d5765ff4-a539-4981-8395-a1a6b47ee6ff",
+    "name": "Samsung SmartThings Apps Scenes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.\n\nContact Support:\n Name: SmartThings Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
