@@ -112,6 +112,11 @@ apis:
     devices, Smart TVs, and appliances.
   humanURL: https://bixby.developer.samsung.com/
   tags:
+  - Artificial Intelligence
+  - Bixby
+  - Natural Language Processing
+  - Voice Assistant
+  tags_raw:
   - AI
   - Bixby
   - Natural Language Processing
@@ -130,6 +135,12 @@ apis:
   - Loyalty
   - Passes
   - Payments
+  - Wallets
+  tags_raw:
+  - Digital Wallet
+  - Loyalty
+  - Passes
+  - Payments
   - Wallet
   properties:
   - type: Documentation
@@ -140,6 +151,8 @@ apis:
   humanURL: https://developer.smartthings.com/
   baseURL: https://api.smartthings.com/v1
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -210,6 +223,8 @@ apis:
   humanURL: https://developer.smartthings.com/
   baseURL: https://api.smartthings.com/v1
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
