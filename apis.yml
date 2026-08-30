@@ -245,6 +245,9 @@ apis:
   - type: Documentation
     url: https://developer.smartthings.com/docs/api/public
 common:
+  - type: CapabilityMap
+    url: capabilities/samsung-capability-edges.yml
+    name: Samsung Business Capability Map
   - type: AgenticAccess
     url: agentic-access/samsung-agentic-access.yml
   - type: DomainSecurity
