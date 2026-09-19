@@ -192,6 +192,8 @@ apis:
   humanURL: https://developer.smartthings.com/
   baseURL: https://api.smartthings.com/v1
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
