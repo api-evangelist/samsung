@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Samsung SmartThings Apps Locations API
+  title: Samsung SmartThings Locations API
   description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
   version: 1.0.0
   contact:
@@ -186,53 +186,7 @@ paths:
         '401':
           description: Unauthorized.
 components:
-  parameters:
-    LocationIdParam:
-      name: locationId
-      in: path
-      required: true
-      description: Unique location identifier (UUID).
-      schema:
-        type: string
-        format: uuid
   schemas:
-    Location:
-      type: object
-      description: A SmartThings location (home, office, etc.).
-      properties:
-        locationId:
-          type: string
-          format: uuid
-          description: Unique location identifier.
-        name:
-          type: string
-          description: Location name.
-        countryCode:
-          type: string
-          description: ISO 3166-1 alpha-3 country code.
-        latitude:
-          type: number
-          format: double
-          description: Location latitude.
-        longitude:
-          type: number
-          format: double
-          description: Location longitude.
-        regionRadius:
-          type: integer
-          description: Geofence radius in meters.
-        temperatureScale:
-          type: string
-          enum:
-          - F
-          - C
-          description: Temperature unit preference.
-        timeZoneId:
-          type: string
-          description: IANA time zone ID (e.g., America/Chicago).
-        locale:
-          type: string
-          description: BCP 47 locale tag.
     CreateLocationRequest:
       type: object
       required:
@@ -279,6 +233,43 @@ components:
             href:
               type: string
               description: URL to the previous page.
+    Location:
+      type: object
+      description: A SmartThings location (home, office, etc.).
+      properties:
+        locationId:
+          type: string
+          format: uuid
+          description: Unique location identifier.
+        name:
+          type: string
+          description: Location name.
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        latitude:
+          type: number
+          format: double
+          description: Location latitude.
+        longitude:
+          type: number
+          format: double
+          description: Location longitude.
+        regionRadius:
+          type: integer
+          description: Geofence radius in meters.
+        temperatureScale:
+          type: string
+          enum:
+          - F
+          - C
+          description: Temperature unit preference.
+        timeZoneId:
+          type: string
+          description: IANA time zone ID (e.g., America/Chicago).
+        locale:
+          type: string
+          description: BCP 47 locale tag.
     Room:
       type: object
       description: A room within a SmartThings location.
@@ -297,6 +288,15 @@ components:
         backgroundImage:
           type: string
           description: Room background image URL.
+  parameters:
+    LocationIdParam:
+      name: locationId
+      in: path
+      required: true
+      description: Unique location identifier (UUID).
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     BearerAuth:
       type: http

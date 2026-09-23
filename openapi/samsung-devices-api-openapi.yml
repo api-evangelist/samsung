@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Samsung SmartThings Apps Devices API
+  title: Samsung SmartThings Devices API
   description: 'The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, rooms, scenes, and building smart home integrations. Supports OAuth 2.0 Bearer tokens and personal access tokens. Base URL: https://api.smartthings.com/v1.'
   version: 1.0.0
   contact:
@@ -191,56 +191,16 @@ paths:
         '422':
           description: Invalid command or capability.
 components:
+  parameters:
+    DeviceIdParam:
+      name: deviceId
+      in: path
+      required: true
+      description: Unique device identifier (UUID).
+      schema:
+        type: string
+        format: uuid
   schemas:
-    DeviceCommandRequest:
-      type: object
-      required:
-      - commands
-      properties:
-        commands:
-          type: array
-          description: List of commands to execute.
-          items:
-            type: object
-            required:
-            - component
-            - capability
-            - command
-            properties:
-              component:
-                type: string
-                description: Component ID (e.g., main).
-              capability:
-                type: string
-                description: Capability ID (e.g., switch, lock).
-              command:
-                type: string
-                description: Command name (e.g., on, off, lock, unlock).
-              arguments:
-                type: array
-                description: Command arguments.
-                items: {}
-    DeviceStatus:
-      type: object
-      description: Full status of all device components and capability attributes.
-      properties:
-        components:
-          type: object
-          description: Map of component IDs to capability status objects. Each capability contains attribute name/value pairs with timestamps.
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-              properties:
-                value:
-                  description: Current attribute value.
-                unit:
-                  type: string
-                  description: Unit of measurement (if applicable).
-                timestamp:
-                  type: string
-                  format: date-time
-                  description: Timestamp of last update.
     Device:
       type: object
       description: A SmartThings connected device.
@@ -307,6 +267,27 @@ components:
             href:
               type: string
               description: URL to the previous page.
+    DeviceStatus:
+      type: object
+      description: Full status of all device components and capability attributes.
+      properties:
+        components:
+          type: object
+          description: Map of component IDs to capability status objects. Each capability contains attribute name/value pairs with timestamps.
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                value:
+                  description: Current attribute value.
+                unit:
+                  type: string
+                  description: Unit of measurement (if applicable).
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: Timestamp of last update.
     DeviceComponent:
       type: object
       description: A functional component of a SmartThings device.
@@ -343,15 +324,34 @@ components:
                 enum:
                 - manufacturer
                 - user
-  parameters:
-    DeviceIdParam:
-      name: deviceId
-      in: path
-      required: true
-      description: Unique device identifier (UUID).
-      schema:
-        type: string
-        format: uuid
+    DeviceCommandRequest:
+      type: object
+      required:
+      - commands
+      properties:
+        commands:
+          type: array
+          description: List of commands to execute.
+          items:
+            type: object
+            required:
+            - component
+            - capability
+            - command
+            properties:
+              component:
+                type: string
+                description: Component ID (e.g., main).
+              capability:
+                type: string
+                description: Capability ID (e.g., switch, lock).
+              command:
+                type: string
+                description: Command name (e.g., on, off, lock, unlock).
+              arguments:
+                type: array
+                description: Command arguments.
+                items: {}
   securitySchemes:
     BearerAuth:
       type: http

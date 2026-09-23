@@ -1,12 +1,7 @@
 {
   "provider": "samsung",
   "sources": [
-    "samsung-apps-api-openapi.yml",
-    "samsung-devices-api-openapi.yml",
-    "samsung-locations-api-openapi.yml",
-    "samsung-rules-api-openapi.yml",
-    "samsung-scenes-api-openapi.yml",
-    "samsung-subscriptions-api-openapi.yml"
+    "_original/samsung-smartthings-openapi.yml"
   ],
   "outputs": [
     "samsung-apps-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "samsung-smartthings-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "samsung-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "samsung-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "samsung-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "samsung-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "samsung-scenes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "samsung-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
