@@ -191,16 +191,108 @@ paths:
         '422':
           description: Invalid command or capability.
 components:
-  parameters:
-    DeviceIdParam:
-      name: deviceId
-      in: path
-      required: true
-      description: Unique device identifier (UUID).
-      schema:
-        type: string
-        format: uuid
   schemas:
+    DeviceComponent:
+      type: object
+      description: A functional component of a SmartThings device.
+      properties:
+        id:
+          type: string
+          description: Component ID (e.g., main, sub).
+        label:
+          type: string
+          description: Human-readable component label.
+        capabilities:
+          type: array
+          description: Capabilities this component supports.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Capability ID (e.g., switch, lock).
+              version:
+                type: integer
+                description: Capability version.
+        categories:
+          type: array
+          description: Device category classifications.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Category name.
+              categoryType:
+                type: string
+                enum:
+                - manufacturer
+                - user
+    Links:
+      type: object
+      description: Pagination links.
+      properties:
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the next page.
+        previous:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the previous page.
+    DeviceCommandRequest:
+      type: object
+      required:
+      - commands
+      properties:
+        commands:
+          type: array
+          description: List of commands to execute.
+          items:
+            type: object
+            required:
+            - component
+            - capability
+            - command
+            properties:
+              component:
+                type: string
+                description: Component ID (e.g., main).
+              capability:
+                type: string
+                description: Capability ID (e.g., switch, lock).
+              command:
+                type: string
+                description: Command name (e.g., on, off, lock, unlock).
+              arguments:
+                type: array
+                description: Command arguments.
+                items: {}
+    DeviceStatus:
+      type: object
+      description: Full status of all device components and capability attributes.
+      properties:
+        components:
+          type: object
+          description: Map of component IDs to capability status objects. Each capability contains attribute name/value pairs with timestamps.
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                value:
+                  description: Current attribute value.
+                unit:
+                  type: string
+                  description: Unit of measurement (if applicable).
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: Timestamp of last update.
     Device:
       type: object
       description: A SmartThings connected device.
@@ -251,107 +343,15 @@ components:
           description: Functional sub-units of the device (main, sub).
           items:
             $ref: '#/components/schemas/DeviceComponent'
-    Links:
-      type: object
-      description: Pagination links.
-      properties:
-        next:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to the next page.
-        previous:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to the previous page.
-    DeviceStatus:
-      type: object
-      description: Full status of all device components and capability attributes.
-      properties:
-        components:
-          type: object
-          description: Map of component IDs to capability status objects. Each capability contains attribute name/value pairs with timestamps.
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-              properties:
-                value:
-                  description: Current attribute value.
-                unit:
-                  type: string
-                  description: Unit of measurement (if applicable).
-                timestamp:
-                  type: string
-                  format: date-time
-                  description: Timestamp of last update.
-    DeviceComponent:
-      type: object
-      description: A functional component of a SmartThings device.
-      properties:
-        id:
-          type: string
-          description: Component ID (e.g., main, sub).
-        label:
-          type: string
-          description: Human-readable component label.
-        capabilities:
-          type: array
-          description: Capabilities this component supports.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Capability ID (e.g., switch, lock).
-              version:
-                type: integer
-                description: Capability version.
-        categories:
-          type: array
-          description: Device category classifications.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Category name.
-              categoryType:
-                type: string
-                enum:
-                - manufacturer
-                - user
-    DeviceCommandRequest:
-      type: object
-      required:
-      - commands
-      properties:
-        commands:
-          type: array
-          description: List of commands to execute.
-          items:
-            type: object
-            required:
-            - component
-            - capability
-            - command
-            properties:
-              component:
-                type: string
-                description: Component ID (e.g., main).
-              capability:
-                type: string
-                description: Capability ID (e.g., switch, lock).
-              command:
-                type: string
-                description: Command name (e.g., on, off, lock, unlock).
-              arguments:
-                type: array
-                description: Command arguments.
-                items: {}
+  parameters:
+    DeviceIdParam:
+      name: deviceId
+      in: path
+      required: true
+      description: Unique device identifier (UUID).
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     BearerAuth:
       type: http

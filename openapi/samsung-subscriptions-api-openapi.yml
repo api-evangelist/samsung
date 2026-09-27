@@ -92,6 +92,33 @@ paths:
           description: Subscription not found.
 components:
   schemas:
+    CreateSubscriptionRequest:
+      type: object
+      required:
+      - sourceType
+      properties:
+        sourceType:
+          type: string
+          enum:
+          - CAPABILITY
+          - DEVICE
+          - MODE
+          - TIMER
+          - SCENE_LIFECYCLE
+          - DEVICE_LIFECYCLE
+        device:
+          type: object
+          properties:
+            deviceId:
+              type: string
+            componentId:
+              type: string
+            capability:
+              type: string
+            attribute:
+              type: string
+            stateChangeOnly:
+              type: boolean
     Subscription:
       type: object
       description: A SmartThings event subscription for a SmartApp.
@@ -134,33 +161,6 @@ components:
             stateChangeOnly:
               type: boolean
               description: Only trigger on attribute state changes.
-    CreateSubscriptionRequest:
-      type: object
-      required:
-      - sourceType
-      properties:
-        sourceType:
-          type: string
-          enum:
-          - CAPABILITY
-          - DEVICE
-          - MODE
-          - TIMER
-          - SCENE_LIFECYCLE
-          - DEVICE_LIFECYCLE
-        device:
-          type: object
-          properties:
-            deviceId:
-              type: string
-            componentId:
-              type: string
-            capability:
-              type: string
-            attribute:
-              type: string
-            stateChangeOnly:
-              type: boolean
   securitySchemes:
     BearerAuth:
       type: http

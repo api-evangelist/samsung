@@ -187,36 +187,6 @@ paths:
           description: Unauthorized.
 components:
   schemas:
-    CreateLocationRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Location name.
-        countryCode:
-          type: string
-          description: ISO 3166-1 alpha-3 country code.
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        regionRadius:
-          type: integer
-          description: Geofence radius in meters.
-        temperatureScale:
-          type: string
-          enum:
-          - F
-          - C
-        timeZoneId:
-          type: string
-          description: IANA time zone ID.
-        locale:
-          type: string
     Links:
       type: object
       description: Pagination links.
@@ -270,6 +240,36 @@ components:
         locale:
           type: string
           description: BCP 47 locale tag.
+    CreateLocationRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Location name.
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        regionRadius:
+          type: integer
+          description: Geofence radius in meters.
+        temperatureScale:
+          type: string
+          enum:
+          - F
+          - C
+        timeZoneId:
+          type: string
+          description: IANA time zone ID.
+        locale:
+          type: string
     Room:
       type: object
       description: A room within a SmartThings location.

@@ -174,47 +174,7 @@ paths:
         '404':
           description: Rule not found.
 components:
-  parameters:
-    RuleIdParam:
-      name: ruleId
-      in: path
-      required: true
-      description: Unique rule identifier.
-      schema:
-        type: string
   schemas:
-    CreateRuleRequest:
-      type: object
-      required:
-      - name
-      - actions
-      properties:
-        name:
-          type: string
-          description: Rule name.
-        actions:
-          type: array
-          description: Rule action definitions.
-          items: {}
-        timeZoneId:
-          type: string
-          description: IANA time zone for time-based conditions.
-    Links:
-      type: object
-      description: Pagination links.
-      properties:
-        next:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to the next page.
-        previous:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to the previous page.
     Rule:
       type: object
       description: A SmartThings automation rule.
@@ -241,6 +201,46 @@ components:
         ownerId:
           type: string
           description: Owner user ID.
+    Links:
+      type: object
+      description: Pagination links.
+      properties:
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the next page.
+        previous:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the previous page.
+    CreateRuleRequest:
+      type: object
+      required:
+      - name
+      - actions
+      properties:
+        name:
+          type: string
+          description: Rule name.
+        actions:
+          type: array
+          description: Rule action definitions.
+          items: {}
+        timeZoneId:
+          type: string
+          description: IANA time zone for time-based conditions.
+  parameters:
+    RuleIdParam:
+      name: ruleId
+      in: path
+      required: true
+      description: Unique rule identifier.
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http
