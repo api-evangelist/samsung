@@ -157,7 +157,7 @@ paths:
                   commands:
                   - component: main
                     capability: switch
-                    command: true
+                    command: 'on'
               Lock:
                 summary: Lock a lock
                 value:
@@ -192,6 +192,84 @@ paths:
           description: Invalid command or capability.
 components:
   schemas:
+    Device:
+      type: object
+      description: A SmartThings connected device.
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+          description: Unique device identifier.
+        name:
+          type: string
+          description: Device display name.
+        label:
+          type: string
+          description: User-assigned device label.
+        manufacturerName:
+          type: string
+          description: Manufacturer name.
+        presentationId:
+          type: string
+          description: Device presentation identifier.
+        locationId:
+          type: string
+          format: uuid
+          description: Location ID this device belongs to.
+        roomId:
+          type: string
+          format: uuid
+          description: Room ID this device is assigned to.
+        ownerId:
+          type: string
+          description: Owner user ID.
+        type:
+          type: string
+          description: Device integration type.
+          enum:
+          - ENDPOINT_APP
+          - DTH
+          - MOBILE
+          - VIPER
+          - MATTER
+          - LAN
+          - BLE
+          - ZWave
+          - Zigbee
+          - HUB
+        components:
+          type: array
+          description: Functional sub-units of the device (main, sub).
+          items:
+            $ref: '#/components/schemas/DeviceComponent'
+    DeviceCommandRequest:
+      type: object
+      required:
+      - commands
+      properties:
+        commands:
+          type: array
+          description: List of commands to execute.
+          items:
+            type: object
+            required:
+            - component
+            - capability
+            - command
+            properties:
+              component:
+                type: string
+                description: Component ID (e.g., main).
+              capability:
+                type: string
+                description: Capability ID (e.g., switch, lock).
+              command:
+                type: string
+                description: Command name (e.g., on, off, lock, unlock).
+              arguments:
+                type: array
+                description: Command arguments.
+                items: {}
     DeviceComponent:
       type: object
       description: A functional component of a SmartThings device.
@@ -244,34 +322,6 @@ components:
             href:
               type: string
               description: URL to the previous page.
-    DeviceCommandRequest:
-      type: object
-      required:
-      - commands
-      properties:
-        commands:
-          type: array
-          description: List of commands to execute.
-          items:
-            type: object
-            required:
-            - component
-            - capability
-            - command
-            properties:
-              component:
-                type: string
-                description: Component ID (e.g., main).
-              capability:
-                type: string
-                description: Capability ID (e.g., switch, lock).
-              command:
-                type: string
-                description: Command name (e.g., on, off, lock, unlock).
-              arguments:
-                type: array
-                description: Command arguments.
-                items: {}
     DeviceStatus:
       type: object
       description: Full status of all device components and capability attributes.
@@ -293,56 +343,6 @@ components:
                   type: string
                   format: date-time
                   description: Timestamp of last update.
-    Device:
-      type: object
-      description: A SmartThings connected device.
-      properties:
-        deviceId:
-          type: string
-          format: uuid
-          description: Unique device identifier.
-        name:
-          type: string
-          description: Device display name.
-        label:
-          type: string
-          description: User-assigned device label.
-        manufacturerName:
-          type: string
-          description: Manufacturer name.
-        presentationId:
-          type: string
-          description: Device presentation identifier.
-        locationId:
-          type: string
-          format: uuid
-          description: Location ID this device belongs to.
-        roomId:
-          type: string
-          format: uuid
-          description: Room ID this device is assigned to.
-        ownerId:
-          type: string
-          description: Owner user ID.
-        type:
-          type: string
-          description: Device integration type.
-          enum:
-          - ENDPOINT_APP
-          - DTH
-          - MOBILE
-          - VIPER
-          - MATTER
-          - LAN
-          - BLE
-          - ZWave
-          - Zigbee
-          - HUB
-        components:
-          type: array
-          description: Functional sub-units of the device (main, sub).
-          items:
-            $ref: '#/components/schemas/DeviceComponent'
   parameters:
     DeviceIdParam:
       name: deviceId
