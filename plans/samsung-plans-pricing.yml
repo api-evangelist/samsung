@@ -46,3 +46,19 @@ plans:
 notes: Samsung exposes developer programs (SmartThings, Bixby, Tizen, Knox) through device partner agreements.
   Public API usage is generally free but partner-onboarded; commercial terms are negotiated through Samsung's
   developer relations team and not published as public price sheets.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - negotiated
+  plans:
+  - name: Contact Sales
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - month
