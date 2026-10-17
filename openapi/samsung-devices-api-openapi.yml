@@ -242,6 +242,50 @@ components:
           description: Functional sub-units of the device (main, sub).
           items:
             $ref: '#/components/schemas/DeviceComponent'
+    DeviceCommandRequest:
+      type: object
+      required:
+      - commands
+      properties:
+        commands:
+          type: array
+          description: List of commands to execute.
+          items:
+            type: object
+            required:
+            - component
+            - capability
+            - command
+            properties:
+              component:
+                type: string
+                description: Component ID (e.g., main).
+              capability:
+                type: string
+                description: Capability ID (e.g., switch, lock).
+              command:
+                type: string
+                description: Command name (e.g., on, off, lock, unlock).
+              arguments:
+                type: array
+                description: Command arguments.
+                items: {}
+    Links:
+      type: object
+      description: Pagination links.
+      properties:
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the next page.
+        previous:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to the previous page.
     DeviceStatus:
       type: object
       description: Full status of all device components and capability attributes.
@@ -263,22 +307,6 @@ components:
                   type: string
                   format: date-time
                   description: Timestamp of last update.
-    Links:
-      type: object
-      description: Pagination links.
-      properties:
-        next:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to the next page.
-        previous:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to the previous page.
     DeviceComponent:
       type: object
       description: A functional component of a SmartThings device.
@@ -315,34 +343,6 @@ components:
                 enum:
                 - manufacturer
                 - user
-    DeviceCommandRequest:
-      type: object
-      required:
-      - commands
-      properties:
-        commands:
-          type: array
-          description: List of commands to execute.
-          items:
-            type: object
-            required:
-            - component
-            - capability
-            - command
-            properties:
-              component:
-                type: string
-                description: Component ID (e.g., main).
-              capability:
-                type: string
-                description: Capability ID (e.g., switch, lock).
-              command:
-                type: string
-                description: Command name (e.g., on, off, lock, unlock).
-              arguments:
-                type: array
-                description: Command arguments.
-                items: {}
   parameters:
     DeviceIdParam:
       name: deviceId

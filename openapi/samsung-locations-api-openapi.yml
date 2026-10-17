@@ -186,16 +186,37 @@ paths:
         '401':
           description: Unauthorized.
 components:
-  parameters:
-    LocationIdParam:
-      name: locationId
-      in: path
-      required: true
-      description: Unique location identifier (UUID).
-      schema:
-        type: string
-        format: uuid
   schemas:
+    CreateLocationRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Location name.
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-3 country code.
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        regionRadius:
+          type: integer
+          description: Geofence radius in meters.
+        temperatureScale:
+          type: string
+          enum:
+          - F
+          - C
+        timeZoneId:
+          type: string
+          description: IANA time zone ID.
+        locale:
+          type: string
     Links:
       type: object
       description: Pagination links.
@@ -212,6 +233,24 @@ components:
             href:
               type: string
               description: URL to the previous page.
+    Room:
+      type: object
+      description: A room within a SmartThings location.
+      properties:
+        roomId:
+          type: string
+          format: uuid
+          description: Unique room identifier.
+        locationId:
+          type: string
+          format: uuid
+          description: Location this room belongs to.
+        name:
+          type: string
+          description: Room name.
+        backgroundImage:
+          type: string
+          description: Room background image URL.
     Location:
       type: object
       description: A SmartThings location (home, office, etc.).
@@ -249,54 +288,15 @@ components:
         locale:
           type: string
           description: BCP 47 locale tag.
-    CreateLocationRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Location name.
-        countryCode:
-          type: string
-          description: ISO 3166-1 alpha-3 country code.
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        regionRadius:
-          type: integer
-          description: Geofence radius in meters.
-        temperatureScale:
-          type: string
-          enum:
-          - F
-          - C
-        timeZoneId:
-          type: string
-          description: IANA time zone ID.
-        locale:
-          type: string
-    Room:
-      type: object
-      description: A room within a SmartThings location.
-      properties:
-        roomId:
-          type: string
-          format: uuid
-          description: Unique room identifier.
-        locationId:
-          type: string
-          format: uuid
-          description: Location this room belongs to.
-        name:
-          type: string
-          description: Room name.
-        backgroundImage:
-          type: string
-          description: Room background image URL.
+  parameters:
+    LocationIdParam:
+      name: locationId
+      in: path
+      required: true
+      description: Unique location identifier (UUID).
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     BearerAuth:
       type: http
