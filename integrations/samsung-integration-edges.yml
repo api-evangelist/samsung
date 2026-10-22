@@ -40,6 +40,50 @@ edges:
       P856 not contradicting (Kin 2026-10-20 decision 2)
   detected_by: sweep-apple-mfi-ecosystem.py
   first_seen: '2026-10-21'
+- partner_name: OpenSSF Best Practices Badge
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.bestpractices.dev/en/projects/6055
+  category: OpenSSF Best Practices badge (open-source project security conformance)
+  contract_reference:
+    register: OpenSSF Best Practices badge projects (bestpractices.dev/en/projects.json, paged)
+    standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
+    spec_file: null
+    role: badge-holder
+    registered_name: LPVS
+    matched_by: github-org
+    matched_on: samsung
+    certified_products:
+    - product: open-source project
+      product_type: open-source project
+      standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
+      lapsed: false
+      partner_tier: gold
+      projects:
+      - name: LPVS
+        id: 6309
+        url: https://www.bestpractices.dev/en/projects/6309
+        badge_level: gold
+      - name: CredSweeper
+        id: 6055
+        url: https://www.bestpractices.dev/en/projects/6055
+        badge_level: passing
+      - name: mTower
+        id: 6108
+        url: https://www.bestpractices.dev/en/projects/6108
+        badge_level: passing
+    signal_note: 'certified_products = ONE entry (product type: open-source project) with the highest CURRENT badge
+      level in partner_tier; a provider whose projects only lost the badge is lapsed: true; project names are context,
+      never counted; in_progress entries are not conformance'
+    detected_by: sweep-openssf-best-practices-badges.py
+    detected: '2026-10-22'
+    identity_source: apis.yml GitHubOrganization pointer (provider's own declaration)
+  detected_by: sweep-openssf-best-practices-badges.py
+  first_seen: '2026-10-22'
 generated: '2026-10-21'
 method: searched
 source:
@@ -50,3 +94,4 @@ checked:
 - https://csa-iot.org/csa-iot_products/
 - https://mfi.apple.com/en/account/accessory-search
 - https://partnernetwork.apple.com/
+- https://www.bestpractices.dev/en/projects.json
