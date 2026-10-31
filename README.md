@@ -1,4 +1,4 @@
-# Samsung (samsung)
+# Samsung
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,195 +66,156 @@
 
 Samsung Electronics is a global technology leader offering developer platforms for building applications and services across mobile devices, IoT, smart home, enterprise security, and entertainment. The Samsung Developer ecosystem spans SmartThings (IoT and smart home platform), Knox (enterprise device security and management), Galaxy mobile SDKs, Smart TV, and Tizen cross-platform development. Samsung provides REST APIs, SDKs, and tools that enable developers to create connected experiences for hundreds of millions of Galaxy devices and Samsung smart home products worldwide.
 
-**APIs.json:** [https://developer.samsung.com/](https://developer.samsung.com/)
+**Areas:** Consumer Electronics · Developer Platform · IoT · Mobile · Smart Home · Smart TV · Wearables
 
-## Scope
+## Samsung on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Samsung is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/samsung/](https://apis.io/providers/samsung/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-- Consumer Electronics
-- Developer Platform
-- IoT
-- Mobile
-- Smart Home
-- Smart TV
-- Wearables
+- [Knox Cloud APIs](https://apis.io/apis/samsung/knox-cloud/) — Samsung Knox provides enterprise-grade device management and security APIs. Knox Cloud APIs enable programmatic access to Knox Deployment Program, Knox…
+- [Samsung Health SDK](https://apis.io/apis/samsung/health-sdk/) — The Samsung Health SDK enables developers to create health and fitness applications for Galaxy Watch and smartphones, providing access to health data…
+- [Galaxy Mobile SDKs](https://apis.io/apis/samsung/galaxy-mobile/) — Samsung Galaxy mobile SDKs provide access to device-specific hardware and software features including S Pen Remote, DeX desktop mode, AR Emoji, foldable…
+- [Samsung Smart TV SDK](https://apis.io/apis/samsung/smart-tv/) — The Samsung Smart TV developer platform enables development of Tizen-based applications for Samsung Smart TVs, including access to TV-specific APIs for…
+- [Bixby Developer API](https://apis.io/apis/samsung/bixby/) — The Bixby developer platform allows developers to integrate Samsung's voice assistant into their applications and create custom Bixby capsules (skills) that…
+- [Samsung Wallet API](https://apis.io/apis/samsung/samsung-wallet/) — Samsung Wallet API allows developers to add digital passes, tickets, boarding passes, loyalty cards, coupons, and payment cards to the Samsung Wallet app on…
+- [Samsung Apps API](https://apis.io/apis/samsung/samsung-apps-api/) — SmartApp registration and management.
+- [Samsung Devices API](https://apis.io/apis/samsung/samsung-devices-api/) — Connected device management and control.
+- [Samsung Locations API](https://apis.io/apis/samsung/samsung-locations-api/) — Location and room management.
+- [Samsung Rules API](https://apis.io/apis/samsung/samsung-rules-api/) — Automation rule management.
+- [Samsung Scenes API](https://apis.io/apis/samsung/samsung-scenes-api/) — Scene activation and management.
+- [Samsung Subscriptions API](https://apis.io/apis/samsung/samsung-subscriptions-api/) — Device event subscriptions.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-08
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### SmartThings API
+Model Context Protocol servers that expose the API to agents.
 
-The SmartThings REST API provides programmatic access to the SmartThings platform for controlling connected devices, creating automations, managing locations, and building smart home integrations. Supports OAuth 2.0 and personal access tokens. Base URL: https://api.smartthings.com/v1.
+- [samsung](https://apis.io/servers/samsung/samsung/)
 
-- **Human URL:** [https://developer.smartthings.com/](https://developer.smartthings.com/)
-- **Base URL:** `https://api.smartthings.com/v1`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Automations
-- Connected Devices
-- IoT
-- Locations
-- Rules
-- Scenes
-- Smart Home
-- SmartThings
+- [Samsung Agentic Access](https://apis.io/agentic-access/samsung/samsung-agentic-access/)
 
-#### Properties
+#### JSON Schema (15)
 
-- [Documentation](https://developer.smartthings.com/docs/)
-- [Documentation](https://developer.smartthings.com/docs/api/public)
-- [OpenAPI](openapi/samsung-smartthings-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/samsung-smartthings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/samsung-smartthings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The data models the API reads and writes.
 
-### Knox Cloud APIs
+- [App](https://apis.io/schemas/samsung/samsung-app/)
+- [CreateLocationRequest](https://apis.io/schemas/samsung/samsung-createlocationrequest/)
+- [CreateRuleRequest](https://apis.io/schemas/samsung/samsung-createrulerequest/)
+- [CreateSubscriptionRequest](https://apis.io/schemas/samsung/samsung-createsubscriptionrequest/)
+- [Device](https://apis.io/schemas/samsung/samsung-device/)
+- [DeviceCommandRequest](https://apis.io/schemas/samsung/samsung-devicecommandrequest/)
+- [DeviceComponent](https://apis.io/schemas/samsung/samsung-devicecomponent/)
+- [DeviceStatus](https://apis.io/schemas/samsung/samsung-devicestatus/)
+- [Links](https://apis.io/schemas/samsung/samsung-links/)
+- [Location](https://apis.io/schemas/samsung/samsung-location/)
+- [Room](https://apis.io/schemas/samsung/samsung-room/)
+- [Rule](https://apis.io/schemas/samsung/samsung-rule/)
+- [Scene](https://apis.io/schemas/samsung/samsung-scene/)
+- [Samsung SmartThings Device](https://apis.io/schemas/samsung/samsung-smartthings-device/)
+- [Subscription](https://apis.io/schemas/samsung/samsung-subscription/)
 
-Samsung Knox provides enterprise-grade device management and security APIs. Knox Cloud APIs enable programmatic access to Knox Deployment Program, Knox Mobile Enrollment, Knox Configure, Knox Manage, Knox E-FOTA, Knox Guard, Knox Asset Intelligence, and Knox MSP Portal for enterprise device lifecycle management.
+#### JSON Structure (2)
 
-- **Human URL:** [https://docs.samsungknox.com/dev/](https://docs.samsungknox.com/dev/)
+Data models expressed in JSON Structure.
 
-#### Tags
+- [Samsung Smartthings Device Structure](https://apis.io/json-structure/samsung/samsung-smartthings-device-structure/)
+- [Samsung Structure](https://apis.io/json-structure/samsung/samsung-structure/)
 
-- Device Management
-- Enterprise
-- Knox
-- MDM
-- Mobile Device Management
-- Security
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://docs.samsungknox.com/dev/)
-- [Documentation](https://developer.samsungknox.com/develop)
-- [Postman Collection](collections/samsung-smartthings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/samsung-smartthings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Samsung Context](https://apis.io/jsonld/samsung/samsung-context/)
 
-### Samsung Health SDK
+#### Vocabulary (1)
 
-The Samsung Health SDK enables developers to create health and fitness applications for Galaxy Watch and smartphones, providing access to health data including steps, heart rate, sleep, workouts, and body measurements.
+The provider's domain terms, defined.
 
-- **Human URL:** [https://developer.samsung.com/health](https://developer.samsung.com/health)
+- [Samsung Developer Vocabulary](https://apis.io/vocabularies/samsung/samsung-vocabulary/)
 
-#### Tags
+#### Examples (3)
 
-- Fitness
-- Galaxy Watch
-- Health
-- Wearables
+Example requests and responses.
 
-#### Properties
+- [Samsung Execute Device Command Example](https://apis.io/examples/samsung/samsung-execute-device-command-example/)
+- [Samsung Executedevicecommands Example](https://apis.io/examples/samsung/samsung-executedevicecommands-example/)
+- [Samsung List Devices Example](https://apis.io/examples/samsung/samsung-list-devices-example/)
 
-- [Documentation](https://developer.samsung.com/health)
-- [Postman Collection](collections/samsung-smartthings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/samsung-smartthings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (7)
 
-### Galaxy Mobile SDKs
+Postman and Open Collection request collections.
 
-Samsung Galaxy mobile SDKs provide access to device-specific hardware and software features including S Pen Remote, DeX desktop mode, AR Emoji, foldable device optimization, Samsung Blockchain, eSE (embedded secure element), TEEGRIS trusted execution environment, and Galaxy Performance SDK.
+- [Samsung SmartThings Apps API](https://apis.io/collections/samsung/open-samsung-apps-api/)
+- [Samsung SmartThings Apps Devices API](https://apis.io/collections/samsung/open-samsung-devices-api/)
+- [Samsung SmartThings Apps Locations API](https://apis.io/collections/samsung/open-samsung-locations-api/)
+- [Samsung SmartThings Apps Rules API](https://apis.io/collections/samsung/open-samsung-rules-api/)
+- [Samsung SmartThings Apps Scenes API](https://apis.io/collections/samsung/open-samsung-scenes-api/)
+- [Samsung SmartThings API](https://apis.io/collections/samsung/open-samsung-smartthings/)
+- [Samsung SmartThings Apps Subscriptions API](https://apis.io/collections/samsung/open-samsung-subscriptions-api/)
 
-- **Human URL:** [https://developer.samsung.com/](https://developer.samsung.com/)
+#### Governance rules (2)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- Android
-- Foldable
-- Galaxy
-- Mobile
-- S Pen
-- Samsung DeX
+- [Samsung — jsonschema rules](https://apis.io/rules/samsung/samsung-jsonschema-spectral-rules/)
+- [Samsung API Rules](https://apis.io/rules/samsung/samsung-rules/)
 
-#### Properties
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Samsung Authentication](https://apis.io/security/samsung/samsung-authentication/)
+- [Samsung Domain Security](https://apis.io/security/samsung/samsung-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Samsung Plans Pricing](https://apis.io/plans/samsung/samsung-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Samsung Rate Limits](https://apis.io/rate-limits/samsung/samsung-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Samsung Finops](https://apis.io/finops/samsung/samsung-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Documentation](https://developer.samsung.com/)
-- [Postman Collection](collections/samsung-smartthings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/samsung-smartthings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Blog](https://developer.samsung.com/blog)
+- [GitHub](https://github.com/SmartThingsCommunity)
 
-### Samsung Smart TV SDK
+## API Evangelist rating
 
-The Samsung Smart TV developer platform enables development of Tizen-based applications for Samsung Smart TVs, including access to TV-specific APIs for media playback, user interface, smart signage, hospitality displays, and TV input management.
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
 
-- **Human URL:** [https://developer.samsung.com/smarttv](https://developer.samsung.com/smarttv)
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
 
-#### Tags
+## How this profile is made
 
-- Media
-- Smart TV
-- Streaming
-- Tizen
-- TV
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-#### Properties
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Samsung: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-- [Documentation](https://developer.samsung.com/smarttv)
-- [Postman Collection](collections/samsung-smartthings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/samsung-smartthings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+## Open an issue
 
-### Bixby Developer API
-
-The Bixby developer platform allows developers to integrate Samsung's voice assistant into their applications and create custom Bixby capsules (skills) that respond to natural language commands across Galaxy devices, Smart TVs, and appliances.
-
-- **Human URL:** [https://bixby.developer.samsung.com/](https://bixby.developer.samsung.com/)
-
-#### Tags
-
-- AI
-- Bixby
-- Natural Language Processing
-- Voice Assistant
-
-#### Properties
-
-- [Documentation](https://bixby.developer.samsung.com/)
-- [Postman Collection](collections/samsung-smartthings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/samsung-smartthings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Samsung Wallet API
-
-Samsung Wallet API allows developers to add digital passes, tickets, boarding passes, loyalty cards, coupons, and payment cards to the Samsung Wallet app on Galaxy devices.
-
-- **Human URL:** [https://developer.samsung.com/wallet](https://developer.samsung.com/wallet)
-
-#### Tags
-
-- Digital Wallet
-- Loyalty
-- Passes
-- Payments
-- Wallet
-
-#### Properties
-
-- [Documentation](https://developer.samsung.com/wallet)
-- [Postman Collection](collections/samsung-smartthings.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/samsung-smartthings.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/samsung-electronics)
-- [Documentation](https://developer.samsung.com/)
-- [Documentation](https://docs.samsungknox.com/dev/)
-- [Documentation](https://developer.smartthings.com/docs/)
-- [GitHub Organization](https://github.com/SmartThingsCommunity)
-- [GitHub Organization](https://github.com/samsung)
-- [Spectral Rules](rules/samsung-rules.yml)
-- [JSON Schema](json-schema/samsung-smartthings-device-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/samsung-smartthings-device-structure.json)
-- [J S O N L D Context](json-ld/samsung-context.jsonld)
-- [Example](examples/samsung-list-devices-example.json)
-- [Example](examples/samsung-execute-device-command-example.json)
-- [Vocabulary](vocabulary/samsung-vocabulary.yml)
-
-## Maintainers
-
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/samsung/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
